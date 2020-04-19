@@ -5,6 +5,30 @@ application up and running.
 
 Things you may want to cover:
 
+# カプハピ（カップルハピネス）
+
+# 概要
+より良い関係になりたいと思っているカップルの
+普段は恥ずかしくて、相手の反応が恐くて言えない考えを
+フリック・クリック１つで届けてコミュニケーションのきっかけを生む
+それがカップルハピネス！
+
+# 機能（一部後日追加含む）
+ログイン機能
+カップルマッチ機能
+ユーザー登録・編集機能
+質問回答・編集機能
+カテゴリー毎一覧機能
+カップル回答比較機能
+カップル間会議メモ作成・編集・削除機能
+家訓作成・編集・削除機能
+ライフプラン作成・編集・削除機能
+プロフェッショナル登録機能
+プロフェッショナルとコミュニケーション機能
+AWS機能（後日）
+イベント・ギフト紹介機能（後日）
+コミュニティ機能（後日）
+
 # バージョン
 ruby 2.6.3p62　rails 5.2.4　
 
@@ -29,20 +53,6 @@ https://drive.google.com/open?id=1ocSUaWJWBYeG7Y0fD7nf_X2toh3qAA6F
 # ER図
 https://drive.google.com/open?id=1f-C_LqcwjUtPo4FNEGQz-tD5zdTxWkvA
 
-
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# gem
+gem 'carrierwave'
+gem 'mini_magick'
