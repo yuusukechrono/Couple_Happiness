@@ -14,6 +14,12 @@ https://drive.google.com/open?id=1csw3exQ93pyNRJj166DtwPhVVafQN-vL
 # リーンキャンパス
 https://drive.google.com/open?id=1aw8qAVlh210SQCSskXL5sT0qRNbCTxvo
 
+# プレゼン資料
+https://drive.google.com/open?id=1DtwumZKBWsF-vv-i-bq8CYImx2g13X3U
+
+# モック動画
+https://drive.google.com/open?id=1l-Qv-c-AylNwOP1YVx2KM2xiJ8KBmVaI
+
 # テーブル定義
 https://drive.google.com/open?id=1vZbjXT0ixcxpVwtZZ2GH11C_XMLcdnER
 
