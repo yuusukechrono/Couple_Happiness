@@ -54,5 +54,5 @@ https://drive.google.com/open?id=1ocSUaWJWBYeG7Y0fD7nf_X2toh3qAA6F
 https://drive.google.com/open?id=1f-C_LqcwjUtPo4FNEGQz-tD5zdTxWkvA
 
 # gem
-gem 'carrierwave'
+gem 'carrierwave'<br>
 gem 'mini_magick'
