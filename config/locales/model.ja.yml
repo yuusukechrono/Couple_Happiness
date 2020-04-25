@@ -1,0 +1,13 @@
+ja:
+  activerecord:
+    user:
+      last_name: 名字
+      first_name: 名前
+      sex: 性別
+      material_status: 未婚・結婚
+      birthday: 誕生日
+      blood_type: 血液型
+      partner_id: パートナーのID
+      email: メールアドレス
+      password_digest: パスワード
+      image: 画像
