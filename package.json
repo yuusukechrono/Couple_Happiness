@@ -1,0 +1,8 @@
+{
+  "name": "couple_happiness",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "3",
+    "jquery": "^3.5.0"
+  }
+}
