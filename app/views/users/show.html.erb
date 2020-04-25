@@ -1,0 +1,20 @@
+<header>アカウントの作成</header>
+<br>
+<% if logged_in? %>
+  <%= link_to "ログアウト", session_path(current_user.id), method: :delete,class: 'btn btn-primary'  %>
+  <br><br>
+<% else %>
+  <br><br>
+<% end %>
+
+<p><%= @user.last_name && @user.first_name %>さんのページを作成しました</p>
+<p>メールアドレス<%= @user.email %></p><br>
+<%= image_tag(@user.image.url, :size =>'100x100') if @user.image && @user.image.url %>
+<%# <%= form.hidden_field :@user.image_cache %>
+<br><br>
+
+<%= link_to 'トップ画面に移動する', question_path(@user.id), class: 'btn btn-primary'  %><br>
+
+<footer>
+  <div class="company">© Couple Happiness. All RIGHTS RESERVED.</div>
+</fotter>
