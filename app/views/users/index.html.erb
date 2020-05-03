@@ -1,0 +1,19 @@
+<%= link_to "ログアウト", session_path(current_user.id), method: :delete, class: 'btn btn-primary' %>  
+<%= link_to 'ユーザー編集', edit_user_path(current_user.id), class: 'btn btn-primary' %><br><br>
+
+<p><%= image_tag(current_user.image.url, size:'80x80')  if current_user.image.present?%>        
+<br>
+<%= current_user.last_name %> <%= current_user.first_name %></p>
+
+
+<% @categories = Category.all %>
+<% @categories.each do |category| %>
+  <%= category.id %>
+  <%= category.detail %><br>
+<% end %>  
+
+<br>
+
+<fotter>
+  <div class="company">© Picture Corp. All RIGHTS RESERVED.</div>
+</fotter>
