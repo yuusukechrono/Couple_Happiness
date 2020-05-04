@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_03_143234) do
+ActiveRecord::Schema.define(version: 2020_05_04_161246) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,15 @@ ActiveRecord::Schema.define(version: 2020_05_03_143234) do
     t.string "detail"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "plans", force: :cascade do |t|
+    t.datetime "plan_date"
+    t.text "detail"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_plans_on_user_id"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -72,6 +81,7 @@ ActiveRecord::Schema.define(version: 2020_05_03_143234) do
 
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
+  add_foreign_key "plans", "users"
   add_foreign_key "questions", "categories"
   add_foreign_key "user_matches", "users", column: "partner_id"
   add_foreign_key "user_matches", "users", column: "party_id"

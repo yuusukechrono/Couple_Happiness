@@ -6,6 +6,17 @@
 <%= current_user.last_name %> <%= current_user.first_name %></p>
 
 
+<p>user search</p>
+<%= form_with url: search_users_path, method: :get, local: true do |f| %>
+  <%= f.text_field :id %>
+  <%= f.submit :search %>
+<% end %>
+
+<%= @user.id if @user.id.present?%> 
+
+
+
+<br><br>
 <% @categories = Category.all %>
 <% @categories.each do |category| %>
   <%= category.id %>

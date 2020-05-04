@@ -2,6 +2,14 @@ class UsersController < ApplicationController
   skip_before_action :login_required
   before_action :set_user, only: [:show, :update]
 
+  def search
+    if params[:id].present?
+      @user = User.find(id: "%#{params[:id]}%")
+    else
+    end
+  end
+
+
   def new
     @user = User.new
   end
@@ -34,6 +42,8 @@ class UsersController < ApplicationController
       render :edit
     end
   end
+
+
 
   private
 
