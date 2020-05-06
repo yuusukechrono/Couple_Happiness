@@ -17,7 +17,7 @@ class PlansController < ApplicationController
   end
 
   def create
-    @plan = Plan.new(plan_params)
+    @plan = current_user.plans.build(plan_params)
     if params[:back]
       render :new
     else
@@ -39,7 +39,7 @@ class PlansController < ApplicationController
 
   def destroy
     @plan.destroy
-    redirect_to properties_path, notice:"計悪を削除しました！"
+    redirect_to plans_path, notice:"計悪を削除しました！"
   end
 
 private
@@ -48,8 +48,8 @@ def plan_params
   params.require(:plan).permit(:user_id, :plan_date, :detail)
 end
 
-def set_property
-  @plna = Plan.find(params[:id])     
+def set_plan
+  @plan = Plan.find(params[:id])     
 end
 
 end

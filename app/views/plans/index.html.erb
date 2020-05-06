@@ -1,7 +1,20 @@
-<% @plans.reverse_each do |plan| %>
+<header>ライフプラン一覧</header>
+
+<br>
+<% @current_user.plans.reverse_each do |plan| %>
   <tr>
-    <td><%= plan.date %></td>
-    <td><%= plne.detail %></td>
-    <td><%= link_to '閲覧', plan_path(plan.id) %></td>
+    <td><%= plan.plan_date %></td>
+    <td><%= plan.detail %></td>
     <td><%= link_to '編集', edit_plan_path(plan.id) %></td>
     <td><%= link_to '削除', plan_path(plan.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } %></td>
+<% end %>
+<br><br>
+<%= link_to 'ライフプランを登録する', new_plan_path %>
+<br><br>
+
+<%= link_to 'トップ画面に移動する', users_path(@current_user.id) %><br>
+
+
+<fotter>
+  <div class="company">© Picture Corp. All RIGHTS RESERVED.</div>
+</fotter>

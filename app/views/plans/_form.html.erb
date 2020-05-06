@@ -1,0 +1,28 @@
+<header><b>ライフプラン登録</b></header><br>
+
+<%= form_with(model: @plan, local: true) do |plan| %>
+  <% if @plan.errors.any? %>
+    <div id="error_explanation">
+      <p><%= @plan.errors.count %>件のエラーがあります。</p>
+      <ul>
+      <% @plan.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= plan.label :年月日 %><br>
+  <%= plan.date_field  :plan_date %><br>
+
+  <%= plan.label :詳細 %><br>
+  <%= plan.text_area :detail %><br>
+
+  <br><br>
+  <%= plan.submit '登録する' %><br><br>
+
+<% end %>
+
+<%= link_to '戻る', plans_path %>
+
+

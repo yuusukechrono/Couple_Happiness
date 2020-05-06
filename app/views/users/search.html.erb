@@ -1,8 +1,29 @@
-<p>user search</p>
+<p>パートナー紐づけ</p>
+
+<p><%= notice %></p>
+
 <%= form_with url: search_users_path, method: :get, local: true do |f| %>
-  <%= f.text_field :id %>
+  <%= f.label :名字 %>
+  <%= f.text_field :last_name %><br>
+  <%= f.label :名前 %>
+  <%= f.text_field :first_name %>
+  <br>
   <%= f.submit :search %>
 <% end %>
+<br>
 
+<% if  @users.present? %>
+  <%  @users.each do |user| %>
+    <%= user.last_name %>
+    <%= user.first_name %><br>
+    <%= image_tag(user.image.url, :size =>'100x100') if user.image && user.image.url %>
+  <% end %>
+  <% else %>
+<% end %>
 
-<%= @partner.id if @partner.id.present?%> 
+<br><br>
+<%= link_to 'トップ画面に移動する', users_path(current_user.id) %><br>
+
+<fotter>
+  <div class="company">© Picture Corp. All RIGHTS RESERVED.</div>
+</fotter>

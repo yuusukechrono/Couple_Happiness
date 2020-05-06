@@ -2,15 +2,6 @@ class UsersController < ApplicationController
   skip_before_action :login_required
   before_action :set_user, only: [ :show, :update]
 
-  def search
-    if params[:id].present?
-      @partner = Users.find(id: "#{params[:id]}")
-    else
-    end
-  end
-
-
-
   def new
     @user = User.new
   end
@@ -45,6 +36,13 @@ class UsersController < ApplicationController
   end
 
 
+  def search
+    if params[:last_name].present? and params[:last_name].present?
+      @users = User.where("last_name LIKE ? or first_name LIKE ?", "%#{params[:last_name]}%", "%#{params[:first_name]}%")
+    else
+      @users = nil
+    end
+  end
 
   private
 
