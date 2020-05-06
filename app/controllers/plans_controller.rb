@@ -30,7 +30,7 @@ class PlansController < ApplicationController
   end
 
   def update
-    if @lan.update(plan_params)
+    if @plan.update(plan_params)
       redirect_to plans_path, notice: "編集しました！"
     else
       render :edit

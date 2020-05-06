@@ -7,5 +7,6 @@ Rails.application.routes.draw do
       get :search
     end
   end
+  resources :plans
   resources :sessions, only: [:new, :create, :destroy]
 end

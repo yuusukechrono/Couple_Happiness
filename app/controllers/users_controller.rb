@@ -1,13 +1,14 @@
 class UsersController < ApplicationController
   skip_before_action :login_required
-  before_action :set_user, only: [:show, :update]
+  before_action :set_user, only: [ :show, :update]
 
   def search
     if params[:id].present?
-      @user = User.find(id: "%#{params[:id]}%")
+      @partner = Users.find(id: "#{params[:id]}")
     else
     end
   end
+
 
 
   def new

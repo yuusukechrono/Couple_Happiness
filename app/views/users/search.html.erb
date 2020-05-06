@@ -1,0 +1,8 @@
+<p>user search</p>
+<%= form_with url: search_users_path, method: :get, local: true do |f| %>
+  <%= f.text_field :id %>
+  <%= f.submit :search %>
+<% end %>
+
+
+<%= @partner.id if @partner.id.present?%> 
