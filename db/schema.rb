@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_04_161246) do
+ActiveRecord::Schema.define(version: 2020_05_09_032104) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,16 @@ ActiveRecord::Schema.define(version: 2020_05_04_161246) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.index ["user_id"], name: "index_plans_on_user_id"
+  end
+
+  create_table "promises", force: :cascade do |t|
+    t.text "detail"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_promises_on_category_id"
+    t.index ["user_id"], name: "index_promises_on_user_id"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -72,7 +82,6 @@ ActiveRecord::Schema.define(version: 2020_05_04_161246) do
     t.string "material_status"
     t.integer "birthday"
     t.string "blood_type"
-    t.integer "partner_id"
     t.text "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -82,6 +91,8 @@ ActiveRecord::Schema.define(version: 2020_05_04_161246) do
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
   add_foreign_key "plans", "users"
+  add_foreign_key "promises", "categories"
+  add_foreign_key "promises", "users"
   add_foreign_key "questions", "categories"
   add_foreign_key "user_matches", "users", column: "partner_id"
   add_foreign_key "user_matches", "users", column: "party_id"

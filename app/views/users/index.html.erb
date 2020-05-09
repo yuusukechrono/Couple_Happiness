@@ -5,12 +5,21 @@
 <br>
 <%= current_user.last_name %> <%= current_user.first_name %></p>
 
+
+<p><%= image_tag(User.all.find_by(id: UserMatch.all.find_by(party_id: current_user.id).partner_id).image.url, size:'80x80') if User.all.find_by(id: UserMatch.all.find_by(party_id: current_user.id).partner_id).image.url.present?%>        
+<br>
+<%= User.all.find_by(id: UserMatch.all.find_by(party_id: current_user.id).partner_id).last_name %>
+<%= User.all.find_by(id: UserMatch.all.find_by(party_id: current_user.id).partner_id).first_name %></p>
+
+
 <%= link_to 'パートナー検索', search_users_path %>
 <br>
 
 <%= link_to 'ライフプラン作成', plans_path %>
 <br>
 
+<%= link_to '家訓作成', promises_path %>
+<br>
 
 <br><br>
 <% @categories = Category.all %>

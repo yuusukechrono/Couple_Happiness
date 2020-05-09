@@ -1,0 +1,28 @@
+<header><b>家訓登録</b></header><br>
+<p><%= notice %></p>
+<%= form_with(model: @promise, local: true) do |promise| %>
+  <% if @promise.errors.any? %>
+    <div id="error_explanation">
+      <p><%= @promise.errors.count %>件のエラーがあります。</p>
+      <ul>
+      <% @promise.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= promise.label :カテゴリー %><br>
+  <%= promise.select :category_id, [["結婚", 1], ["趣味", 2], ["食事", 3], ["イベント", 4],  ["仕事", 5],  ["住居", 6],  ["家事", 7],  ["服", 8],  ["お金", 9],  ["子育て", 10],  ["家族", 11],  ["介護", 12],  ["友人", 13],  ["美容", 14],  ["健康", 15],  ["性生活", 16]], include_blank: "選択して下さい" %><br>
+
+  <%= promise.label :詳細 %><br>
+  <%= promise.text_area :detail %><br>
+
+  <br><br>
+  <%= promise.submit '登録する' %><br><br>
+
+<% end %>
+
+<%= link_to '戻る', promises_path %>
+
+

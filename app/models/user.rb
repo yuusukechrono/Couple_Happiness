@@ -7,5 +7,10 @@ class User < ApplicationRecord
 
   has_many :answers
   has_many :plans
-  
+  has_many :promises
+  has_many :user_matches
+
+  has_one :parties, class_name: "UserMatch"
+  has_one :partners, class_name: "UserMatch"
+
 end

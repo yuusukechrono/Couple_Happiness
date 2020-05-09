@@ -1,0 +1,20 @@
+<header>家訓一覧</header>
+<p><%= notice %></p>
+<br>
+<% @current_user.promises.reverse_each do |promise| %>
+  <tr>
+    <td><%= promise.category.detail %></td>
+    <td><%= promise.detail %></td>
+    <td><%= link_to '編集', edit_promise_path(promise.id) %></td>
+    <td><%= link_to '削除', promise_path(promise.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } %></td>
+<% end %>
+<br><br>
+<%= link_to '家訓を登録する', new_promise_path %>
+<br><br>
+
+<%= link_to 'トップ画面に移動する', users_path(@current_user.id) %><br>
+
+
+<fotter>
+  <div class="company">© Picture Corp. All RIGHTS RESERVED.</div>
+</fotter>

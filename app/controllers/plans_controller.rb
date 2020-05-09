@@ -39,7 +39,7 @@ class PlansController < ApplicationController
 
   def destroy
     @plan.destroy
-    redirect_to plans_path, notice:"計悪を削除しました！"
+    redirect_to plans_path, notice:"計画を削除しました！"
   end
 
 private
