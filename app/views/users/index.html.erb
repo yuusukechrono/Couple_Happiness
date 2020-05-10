@@ -1,24 +1,49 @@
 <%= link_to "ログアウト", session_path(current_user.id), method: :delete, class: 'btn btn-primary' %>  
 <%= link_to 'ユーザー編集', edit_user_path(current_user.id), class: 'btn btn-primary' %><br><br>
 
-<p><%= image_tag(current_user.image.url, size:'80x80')  if current_user.image.present?%>        
+<p>
+<%= image_tag(current_user.image.url, size:'80x80')  if current_user.image.present?%>        
 <br>
-<%= current_user.last_name %> <%= current_user.first_name %></p>
+<%= current_user.last_name %> <%= current_user.first_name %>
+</p>
 
 
-<p><%= image_tag(User.all.find_by(id: UserMatch.all.find_by(party_id: current_user.id).partner_id).image.url, size:'80x80') if User.all.find_by(id: UserMatch.all.find_by(party_id: current_user.id).partner_id).image.url.present?%>        
-<br>
-<%= User.all.find_by(id: UserMatch.all.find_by(party_id: current_user.id).partner_id).last_name %>
-<%= User.all.find_by(id: UserMatch.all.find_by(party_id: current_user.id).partner_id).first_name %></p>
+<% if (UserMatch.all.find_by(partner_id: current_user.id)).present?  %>
+  <% if (UserMatch.all.find_by(party_id: current_user.id)).present?  %>
 
+    <p>
+    <%= image_tag(User.all.find_by(id: UserMatch.all.find_by(party_id: current_user.id).partner_id).image.url, size:'80x80') if User.all.find_by(id: UserMatch.all.find_by(party_id: current_user.id).partner_id).image.url.present?%>        
+      <br>
+    <%= User.all.find_by(id: UserMatch.all.find_by(party_id: current_user.id).partner_id).last_name %>
+    <%= User.all.find_by(id: UserMatch.all.find_by(party_id: current_user.id).partner_id).first_name %>
+    </p>
+
+  <% end %>
+<% end %>
 
 <%= link_to 'パートナー検索', search_users_path %>
-<br>
+<% if (UserMatch.all.find_by(partner_id: current_user.id)).present? %>
+  <% if (UserMatch.all.find_by(party_id: current_user.id)).present? %>
+  <% else %>
 
-<%= link_to 'ライフプラン作成', plans_path %>
-<br>
+    <%= form_with model: UserMatch.new, local: true do |f| %>
+      <%= f.hidden_field :party_id, value: current_user.id %>
+      <%= f.hidden_field :partner_id, value: UserMatch.all.find_by(partner_id: current_user.id).party_id %>
+      <%= f.hidden_field :confirmation_status, value: 1 %>   
+      <%= 'パートナーから申請が来ています！'%>
+      <%= f.submit :承認する %>
 
-<%= link_to '家訓作成', promises_path %>
+  <% end %>
+
+  <% end %>
+<% end %>
+
+<br><br>
+
+<%= link_to 'ライフプラン', plans_path %>
+<br><br>
+
+<%= link_to '家訓', promises_path %>
 <br>
 
 <br><br>
