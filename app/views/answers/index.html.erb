@@ -1,0 +1,31 @@
+<header><b>質問と回答一覧</b></header>
+<br>
+<%= current_user.last_name %> <%= current_user.first_name %>の回答状況
+<br>
+
+<% (1..16).each do |i| %>
+  <% @questions = Question.where(category_id: i) %>
+  <%= i %>.<%= Category.all.find(i).detail %>
+  <br>
+  <% @questions.each do |question| %>
+    <%= question.detail %><br>
+    <% if Answer.where("(question_id = ?) and (user_id = ?)" , question.id, current_user.id).present? %>
+      <% Answer.where("(question_id = ?) and (user_id = ?)" , question.id, current_user.id).answer %>
+      <br>
+    <% else %>
+      "未回答"
+      <br>
+    <% end %>
+    <br>
+  <% end %> 
+  <br>
+<% end %>
+
+<br>
+
+<%= link_to 'トップ画面に移動する', users_path(@current_user.id) %>
+<br>
+
+<fotter>
+  <div class="company">© Picture Corp. All RIGHTS RESERVED.</div>
+</fotter>

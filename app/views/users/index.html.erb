@@ -40,26 +40,15 @@
 
 <br><br>
 
-<%= link_to 'ライフプラン', plans_path %>
+<%= link_to 'ライフプランを見る', plans_path %>
 <br><br>
 
-<%= link_to '家訓', promises_path %>
-<br>
-
+<%= link_to '家訓を見る', promises_path %>
 <br><br>
-<% @categories = Category.all %>
-<% @categories.each do |category| %>
-  <%= category.id %>
-  <%= category.detail %><br>
-<% end %>  
 
-<% @questions = Question.all %>
-<% @questions.each do |question| %>
-  <%= question.id %>
-  <%= question.detail %><br>
-  <%= question.answer_left %>
-  <%= question.answer_right %><br>
-<% end %>  
+<%= link_to '質問を見る', answers_path %>
+<br><br>
+
 
 <br>
 
