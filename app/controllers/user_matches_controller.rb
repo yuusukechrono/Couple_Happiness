@@ -14,12 +14,12 @@ class UserMatchesController < ApplicationController
     def create
       @user_match = UserMatch.new(user_match_params)
       if params[:back]
-        redirect_to search_users_path, notice: "エラー！"
+        redirect_to search_users_path
       else
         if @user_match.save
           redirect_to users_path, notice: "承認を送りました！"
         else
-          redirect_to search_users_path, notice: "エロー！"
+          redirect_to search_users_path
         end
       end
     end

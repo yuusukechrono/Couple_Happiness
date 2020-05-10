@@ -53,6 +53,14 @@
   <%= category.detail %><br>
 <% end %>  
 
+<% @questions = Question.all %>
+<% @questions.each do |question| %>
+  <%= question.id %>
+  <%= question.detail %><br>
+  <%= question.answer_left %>
+  <%= question.answer_right %><br>
+<% end %>  
+
 <br>
 
 <fotter>
