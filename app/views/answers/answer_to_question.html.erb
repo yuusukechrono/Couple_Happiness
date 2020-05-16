@@ -1,0 +1,62 @@
+<header><b>質問一覧</b></header>
+<br><br>
+<p><%= notice %></p>
+<br><br>
+
+<% (1..16).each do |i| %>
+  <% @questions = Question.where(category_id: i) %>
+  <%= i %>.<%= Category.all.find(i).detail %>
+  <br><br>
+  <% j = 1 %>
+  <% @questions.each do |question| %>
+    Q.<%= j %><%= question.detail %><br>
+    <% j +=1 %> 
+
+    <% @answer = Answer.find_by("(question_id = ?) and (user_id = ?)" , question.id, current_user.id) %>
+    <% if @answer.present? %>
+     
+      <%= form_with model: Answer.find(@answer.id), local: true do |a| %>
+        <%= a.radio_button :answer, 1 %>
+        <%= a.label :answer, question.answer_left %>
+        <%= a.radio_button :answer, 2 %>
+        <%= a.label :answer, question.answer_right %>
+        <br>
+        <%= a.label :詳細（細かく記載したい場合お使いください） %><br>
+        <%= a.text_area :answer_detail %>
+        <%= a.hidden_field :user_id, value: current_user.id %>   
+        <%= a.hidden_field :question_id, value: question.id %>   
+        <%= a.submit :申請する %>
+      <% end %>
+
+    <% else %>
+
+      <%= form_with model: Answer.new, local: true do |a| %>
+        <%= a.radio_button :answer, 1 %>
+        <%= a.label :answer, question.answer_left %>
+        <%= a.radio_button :answer, 2 %>
+        <%= a.label :answer, question.answer_right %>
+        <br>
+        <%= a.label :詳細（細かく記載したい場合お使いください） %><br>
+        <%= a.text_area :answer_detail %>
+        <%= a.hidden_field :user_id, value: current_user.id %>   
+        <%= a.hidden_field :question_id, value: question.id %>   
+        <%= a.submit :申請する %>
+      <% end %>
+
+    <% end %>
+
+    <br>
+  <% end %> 
+  <br>
+<% end %>
+
+<br>
+
+<%= link_to '質問と回答の一覧に移動する', answers_path %>
+<br><br>
+<%= link_to 'トップ画面に移動する', users_path(@current_user.id) %>
+<br>
+
+<fotter>
+  <div class="company">© Picture Corp. All RIGHTS RESERVED.</div>
+</fotter>

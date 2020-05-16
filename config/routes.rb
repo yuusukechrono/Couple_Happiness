@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   resources :plans
   resources :promises
   resources :user_matches
-  resources :answers
+  resources :answers do   
+    collection do
+    get :answer_to_question
+    end
+  end
   resources :sessions, only: [:new, :create, :destroy]
 end

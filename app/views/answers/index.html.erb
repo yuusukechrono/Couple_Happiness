@@ -1,21 +1,34 @@
 <header><b>質問と回答一覧</b></header>
-<br>
+<br><br>
 <%= current_user.last_name %> <%= current_user.first_name %>の回答状況
-<br>
+<br><br>
+<%= link_to '質問に答える', answer_to_question_answers_path %>
+<br><br>
 
 <% (1..16).each do |i| %>
   <% @questions = Question.where(category_id: i) %>
   <%= i %>.<%= Category.all.find(i).detail %>
   <br>
+  <% j = 1 %>
   <% @questions.each do |question| %>
-    <%= question.detail %><br>
-    <% if Answer.where("(question_id = ?) and (user_id = ?)" , question.id, current_user.id).present? %>
-      <% Answer.where("(question_id = ?) and (user_id = ?)" , question.id, current_user.id).answer %>
+    Q.<%= j %><%= question.detail %><br>
+    <% @answer = Answer.find_by("(question_id = ?) and (user_id = ?)" , question.id, current_user.id) %>
+    <% if @answer.present? %>
+      <% if @answer.answer == "1" %>
+        <%= question.answer_left %>
+        <br>
+        <%= @answer.answer_detail %>
+      <% else %>
+        <%= question.answer_right %>
+        <br>
+        <%= @answer.answer_detail %>
+      <% end %>
       <br>
     <% else %>
       "未回答"
       <br>
     <% end %>
+    <% j +=1 %> 
     <br>
   <% end %> 
   <br>
