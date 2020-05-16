@@ -2,39 +2,38 @@
 <br><br>
 <%= current_user.last_name %> <%= current_user.first_name %>の回答状況
 <br><br>
-<%= link_to '質問に答える', answer_to_question_answers_path %>
+
+<%= link_to '質問に答える', answer_to_question_answers_path(:category_for_answer => @category) %>
 <br><br>
 
-<% (1..16).each do |i| %>
-  <% @questions = Question.where(category_id: i) %>
-  <%= i %>.<%= Category.all.find(i).detail %>
-  <br>
-  <% j = 1 %>
-  <% @questions.each do |question| %>
-    Q.<%= j %><%= question.detail %><br>
-    <% @answer = Answer.find_by("(question_id = ?) and (user_id = ?)" , question.id, current_user.id) %>
-    <% if @answer.present? %>
-      <% if @answer.answer == "1" %>
-        <%= question.answer_left %>
-        <br>
-        <%= @answer.answer_detail %>
-      <% else %>
-        <%= question.answer_right %>
-        <br>
-        <%= @answer.answer_detail %>
-      <% end %>
-      <br>
-    <% else %>
-      "未回答"
-      <br>
-    <% end %>
-    <% j +=1 %> 
-    <br>
-  <% end %> 
-  <br>
-<% end %>
+<%= @category %>
+<%= Category.all.find(@category).detail %>
+<br><br>
 
-<br>
+<% @questions = Question.where(category_id: @category) %>
+<% j = 1 %>
+<% @questions.each do |question| %>
+  Q.<%= j %><%= question.detail %><br>
+  <% @answer = Answer.find_by("(question_id = ?) and (user_id = ?)" , question.id, current_user.id) %>
+  <% if @answer.present? %>
+    <% if @answer.answer == "1" %>
+      <%= question.answer_left %>
+      <br>
+      <%= @answer.answer_detail %>
+    <% else %>
+      <%= question.answer_right %>
+      <br>
+      <%= @answer.answer_detail %>
+    <% end %>
+    <br>
+  <% else %>
+    "未回答"
+    <br>
+  <% end %>
+  <% j +=1 %> 
+  <br>
+<% end %> 
+<br><br>
 
 <%= link_to 'トップ画面に移動する', users_path(@current_user.id) %>
 <br>

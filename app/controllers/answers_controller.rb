@@ -3,6 +3,7 @@ class AnswersController < ApplicationController
 
   def index
     @answers = Answer.all.order(question_id: :asc)
+    @category = params[:category]
   end
 
   def new
@@ -37,6 +38,8 @@ class AnswersController < ApplicationController
   end
 
   def answer_to_question
+    @category_for_answer = params[:category_for_answer]
+
   end
 
   def destroy

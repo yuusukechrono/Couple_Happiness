@@ -3,9 +3,13 @@
 <p><%= notice %></p>
 <br><br>
 
-<% (1..16).each do |i| %>
-  <% @questions = Question.where(category_id: i) %>
-  <%= i %>.<%= Category.all.find(i).detail %>
+
+<%= @category_for_answer %>
+<%= Category.all.find(@category_for_answer).detail %>
+<br>
+
+  <% @questions = Question.where(category_id: @category_for_answer) %>
+
   <br><br>
   <% j = 1 %>
   <% @questions.each do |question| %>
@@ -48,11 +52,11 @@
     <br>
   <% end %> 
   <br>
-<% end %>
+
 
 <br>
 
-<%= link_to '質問と回答の一覧に移動する', answers_path %>
+<%= link_to '質問と回答の一覧に移動する', answers_path(:category => @category) %>
 <br><br>
 <%= link_to 'トップ画面に移動する', users_path(@current_user.id) %>
 <br>
