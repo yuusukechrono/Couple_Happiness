@@ -22,7 +22,7 @@ class AnswersController < ApplicationController
       render :new
     else
       if @answer.save
-        redirect_to answer_to_question_path, notice: "質問に回答しました！"
+        
       else
       render :new
       end
@@ -31,7 +31,7 @@ class AnswersController < ApplicationController
 
   def update
     if @answer.update(answer_params)
-      redirect_to answers_path, notice: "編集しました！"
+      
     else
       render :edit
     end
@@ -39,7 +39,6 @@ class AnswersController < ApplicationController
 
   def answer_to_question
     @category_for_answer = params[:category_for_answer]
-
   end
 
   def destroy

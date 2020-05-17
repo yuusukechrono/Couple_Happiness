@@ -1,5 +1,5 @@
-<%= link_to "ログアウト", session_path(current_user.id), method: :delete, class: 'btn btn-primary' %>  
-<%= link_to 'ユーザー編集', edit_user_path(current_user.id), class: 'btn btn-primary' %><br><br>
+<%= link_to "ログアウト", session_path(current_user.id), method: :delete %>  
+<%= link_to 'ユーザー編集', edit_user_path(current_user.id) %><br><br>
 
 <p>
 <%= image_tag(current_user.image.url, size:'80x80')  if current_user.image.present?%>        
@@ -65,8 +65,8 @@
 <%= link_to '16.性生活', answers_path(:category => 16) %><br>
 <br><br>
 
-
-<br>
+<%= link_to 'プロフェッショナルに相談する', professionals_path %>
+<br><br>
 
 <fotter>
   <div class="company">© Picture Corp. All RIGHTS RESERVED.</div>

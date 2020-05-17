@@ -20,10 +20,12 @@
       <%= question.answer_left %>
       <br>
       <%= @answer.answer_detail %>
-    <% else %>
+    <% elsif @answer.answer == "2" %>
       <%= question.answer_right %>
       <br>
       <%= @answer.answer_detail %>
+    <% else %>
+      "未回答"
     <% end %>
     <br>
   <% else %>

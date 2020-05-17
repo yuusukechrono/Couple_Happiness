@@ -23,7 +23,7 @@ class UsersController < ApplicationController
       if User.find(params[:id]) == current_user
         @user = User.find(current_user.id)
       else
-        redirect_to pictures_path, notic:"人のIDは編集できません"
+        redirect_to user_path, notic:"人のIDは編集できません"
       end
   end
   

@@ -1,0 +1,25 @@
+<header>プロフェッショナルログイン</header>
+<br>
+<% if logged_in_professional? %>
+  <%= link_to "ログアウト", destroy_professional_sessions_path(current_professional.id) %>
+  <br><br>
+<% else %>
+  <%= link_to "プロフェッショナルアカウント作成", new_professional_path %>
+  <br><br>
+<% end %>
+
+<% flash.each do |key,value|%>
+  <%= content_tag(:div, value, class:"#{key}") %>
+<% end %>
+
+<%= form_with(scope: :session, url:create_professional_sessions_path, local:true) do |f| %>
+  <%= f.label :email %>
+  <%= f.email_field :email %><br>
+  <%= f.label :password %>
+  <%= f.password_field :password %><br><br>
+  <%= f.submit "ログイン"%>
+<% end %>
+
+<footer>
+  <div class="company">© Couple Happiness Corp. All RIGHTS RESERVED.</div>
+</fotter>

@@ -1,12 +1,13 @@
-<header>ログイン</header>
+<header>ユーザーログイン</header>
 <br>
 <% if logged_in? %>
-  <%= link_to "ログアウト", session_path(current_user.id), method: :delete,class: 'btn btn-primary' %>
+  <%= link_to "ログアウト", session_path(current_user.id), method: :delete%>
   <br><br>
 <% else %>
-  <%= link_to "アカウント作成", new_user_path, class: 'btn btn-primary'  %>
+  <%= link_to "ユーザーアカウント作成", new_user_path %>
   <br><br>
 <% end %>
+<%= link_to "プロフェッショナルページへ切り替え", new_professional_sessions_path %><br><br>
 
 <% flash.each do |key,value|%>
   <%= content_tag(:div, value, class:"#{key}") %>
@@ -17,7 +18,7 @@
   <%= f.email_field :email %><br>
   <%= f.label :password %>
   <%= f.password_field :password %><br><br>
-  <%= f.submit "ログイン", class: 'btn btn-primary'%>
+  <%= f.submit "ログイン"%>
 <% end %>
 
 <footer>

@@ -1,0 +1,28 @@
+<% @professional = Professional.all %>
+<header>プロフェッショナル一覧</header>
+<br>
+<table>
+  <tr>
+  <th></th>
+  <th>名前</th>
+  <th>サービス名</th>
+  <th>詳細</th>
+  </tr>
+
+<% @professional.reverse_each do |professional| %>
+  <tr>
+    <td><%= image_tag(professional.professional_image.url, size:'80x80') if professional.professional_image.present?%></td>
+    <td><%= professional.last_name %><%= professional.first_name %></td>
+    <td><%= professional.service_name %></td>
+    <td><%= professional.self_introduction %></td>
+  </tr>
+<% end %>
+</table>
+
+<br>
+<%= link_to 'トップ画面に移動する', users_path(current_user.id) %><br>
+
+
+<fotter>
+  <div class="company">© Picture Corp. All RIGHTS RESERVED.</div>
+</fotter>

@@ -1,7 +1,7 @@
 <header>アカウントの作成</header>
 <br>
 <% if logged_in? %>
-  <%= link_to "ログアウト", session_path(current_user.id), method: :delete,class: 'btn btn-primary'  %>
+  <%= link_to "ログアウト", session_path(current_user.id), method: :delete %>
   <br><br>
 <% else %>
   <br><br>

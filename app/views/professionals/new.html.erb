@@ -1,0 +1,84 @@
+<header>プロフェッショナル新規登録</header>
+<br>
+<% if logged_in_professional? %>
+  <%= link_to "ログアウト", destroy_professional_sessions_path(current_professional.id) %>  
+  <br><br>
+<% else %>
+  <%= link_to "ログイン", new_professional_sessions_path %>
+  <br><br>
+<% end %>
+
+<% if @professional.errors.any? %>
+  <div id="error_explanation">
+    <h1><%= pluralize(@professional.errors.count, "error") %> prohibited this @professional from being saved:</h1>
+    <ul>
+      <% @professional.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with(model: @professional, local: true) do |f| %>
+  
+  <%= f.label :名字 %>
+  <%= f.text_field :last_name %>
+  <br>
+    <%= f.label :名前 %>
+  <%= f.text_field :first_name %>
+  <br> 
+  
+  <%= f.label :メールアドレス %>
+  <%= f.email_field :email %>
+  <br>
+    <%= f.label :パスワード %>
+  <%= f.password_field:password %>
+  <br>
+  <%= f.label :パスワード（確認） %>
+  <%= f.password_field :password_confirmation %>
+  <br>
+
+  <%= f.label :性別 %>
+  <%= f.radio_button :sex, :male %>
+  <%= f.label :sex, "男性", {value: :male, style: "display: inline-block;"} %>
+  <%= f.radio_button :sex, :female %>
+  <%= f.label :sex, "女性", {value: :female, style: "display: inline-block;"} %>
+  <br>
+
+  <%= f.label :アピールポイント %>
+  <%= f.text_area :self_introduction %>
+  <br>
+  <%= f.label :サービス名 %>
+  <%= f.text_area :service_name %>
+  <br>
+  <%= f.label :価格 %>
+  <%= f.text_field :price %>
+  <br>
+
+  <%= f.label :金融機関 %>
+  <%= f.text_field :bank %>
+  <br>
+  <%= f.label :支店 %>
+  <%= f.text_field :branch %>
+  <br>
+  <%= f.label :支店番号 %>
+  <%= f.text_field :branch_number %>
+  <br>
+  <%= f.label :口座名 %>
+  <%= f.text_field :account %>
+  <br>
+  <%= f.label :口座番号 %>
+  <%= f.text_field :account_number %>
+  <br>
+
+  <%= f.label :写真をアップロード %>
+  <%= f.file_field  :professional_image %>
+  <%= f.hidden_field  :professional_image_cache %>
+  <br>
+  <%= f.submit "アカウントの作成" %>
+  <br>
+<% end %>
+
+<fotter>
+  <div class="company">© Picture Corp. All RIGHTS RESERVED.</div>
+</fotter>

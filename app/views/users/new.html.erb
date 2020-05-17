@@ -1,10 +1,10 @@
 <header>新規登録</header>
 <br>
 <% if logged_in? %>
-  <%= link_to "ログアウト", session_path(current_user.id), method: :delete,class: 'btn btn-primary'  %>
+  <%= link_to "ログアウト", session_path(current_user.id), method: :delete %>
   <br><br>
   <% else %>
-  <%= link_to "ログイン", new_session_path, class: 'btn btn-primary' %>
+  <%= link_to "ログイン", new_session_path %>
   <br><br>
 <% end %>
 
@@ -38,13 +38,13 @@
   <br>
   
   <%= f.label :パスワード（確認） %>
-  <%= f.password_field :password_cofirmation %>
+  <%= f.password_field :password_confirmation %>
   <br>
 
   <%= f.label :性別 %>
-  <%= f.radio_button :性別, :male %>
+  <%= f.radio_button :sex, :male %>
   <%= f.label :sex, "男性", {value: :male, style: "display: inline-block;"} %>
-  <%= f.radio_button :性別, :female %>
+  <%= f.radio_button :sex, :female %>
   <%= f.label :sex, "女性", {value: :female, style: "display: inline-block;"} %>
   <br>
 
@@ -65,14 +65,11 @@
     date_separator: '/') %>
   <br>
 
-  <%= f.label :パートナーID %>
-  <%= f.password_field :partner_id %>
-
   <%= f.label :写真をアップロード %>
   <%= f.file_field  :image %>
   <%= f.hidden_field  :image_cache %>
   <br>
-  <%= f.submit "アカウントの作成",class: 'btn btn-primary'  %>
+  <%= f.submit "アカウントの作成" %>
   <br>
 <% end %>
 

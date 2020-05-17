@@ -1,10 +1,10 @@
 <header>ユーザー情報編集</header>
 <br>
 <% if logged_in? %>
-  <%= link_to "ログアウト", session_path(current_user.id), method: :delete,class: 'btn btn-primary'  %>
+  <%= link_to "ログアウト", session_path(current_user.id), method: :delete %>
   <br><br>
   <% else %>
-  <%= link_to 'トップ画面に移動する', user_path(@user.id), class: 'btn btn-primary'%><br>
+  <%= link_to 'トップ画面に移動する', user_path(@user.id) %><br>
   <br><br>
 <% end %>
 
@@ -38,7 +38,7 @@
   <br>
   
   <%= f.label :パスワード（確認） %>
-  <%= f.password_field :password_cofirmation %>
+  <%= f.password_field :password_confirmation %>
   <br>
 
   <%= f.label :性別 %>

@@ -1,0 +1,22 @@
+<%= link_to "ログアウト", destroy_professional_sessions_path(current_professional.id) %>  <br><br>
+<%= link_to 'プロフェッショナル情報編集', edit_professional_path(current_professional.id) %><br><br>
+
+<table>
+  <tr>
+  <th></th>
+  <th>名前</th>
+  <th>サービス名</th>
+  <th>詳細</th>
+  </tr>
+
+<tr>
+<td><%= image_tag(current_professional.professional_image.url, size:'80x80')  if current_professional.professional_image.present?%></td>
+<td><%= current_professional.last_name %> <%= current_professional.first_name %></td>
+<td><%= current_professional.service_name %></td>
+<td><%= current_professional.self_introduction %></td>
+</tr>
+</table>
+
+<fotter>
+  <div class="company">© Picture Corp. All RIGHTS RESERVED.</div>
+</fotter>
