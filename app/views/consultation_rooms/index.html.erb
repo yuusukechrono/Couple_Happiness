@@ -1,0 +1,31 @@
+<table class="table table-hover" >
+  <thead>
+    <header>メッセージ一覧</header>
+  </thead>
+  <tbody>
+ 
+  <% if @consultation_rooms.present? %>
+    <% @consultation_rooms.each do |consultation_room| %>
+      <td>
+        <% if logged_in? %>
+          <% if consultation_room.sender_id == current_user.id %>
+            <%= consultation_room.professional.last_name %><%= consultation_room.professional.first_name %>
+            <%= link_to 'メッセージをやり取りする', consultation_room_messages_path(consultation_room.id)%>
+          <% end %>
+        <% elsif logged_in_professional? %>
+          <% if consultation_room.recipient_id == current_professional.id %>
+            <%= consultation_room.user.last_name %><%= consultation_room.user.first_name %>
+            <%= link_to 'メッセージをやり取りする', consultation_room_messages_path(consultation_room.id)%>
+          <% end %>
+        <% end %>
+      </td>
+    <% end %>
+<% end %>
+  </tbody>
+</table>
+
+<%= link_to 'トップページに戻る', professional_path(current_professional) %>
+
+<fotter>
+  <div class="company">© Picture Corp. All RIGHTS RESERVED.</div>
+</fotter>

@@ -1,0 +1,64 @@
+<h2><%= @consultation_room.user.last_name %><%= @consultation_room.user.first_name %>　と　<%= @consultation_room.professional.last_name %><%= @consultation_room.professional.first_name %>の相談部屋</h2>
+<br><br>
+
+<% if @over_ten %>
+  <%= link_to '以前のメッセージ', '?m=all' %>
+<% end %>
+<div class="ui segment">
+  <% @messages.each do |message| %>
+    <% if message.body.present? %>
+      <div class="item">
+        <div class="content">
+          <div class="header">
+          <strong>
+          <% if message.user_id.present? %>
+            <%= message.user.last_name %><%= message.user.first_name%>
+          <% elsif message.professional_id.present? %>
+            <%= message.professional.last_name %><%= message.professional.first_name %>
+          <% else %>
+          <% end %>
+          </strong>
+          <%= message.created_at %>
+          </div>
+          <div class="list">
+            <div class="item">
+              <i class="right triangle icon"></i>
+              <%= message.body %> 
+              <% if message.user == current_user %>
+                / <%= message.read ? '既読' : '未読' %>
+              <% elsif message.professional == current_professional %>
+                / <%= message.read ? '既読' : '未読' %>
+              <% else %>
+              <% end %>  
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+<%= form_with(model: [@consultation_room, @message]) do |f| %>
+  <div class="field">
+    <%= f.text_area :body%>
+  </div>
+    <% if logged_in? %>
+      <%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>
+    <% elsif logged_in_professional? %>
+    <%= f.text_field :professional_id, value: current_professional.id, type: "hidden"  %>
+    <% end %>
+  <div>
+    <%= f.submit "メッセージを送る" %>
+  </div>
+<% end %>
+<br><br>
+
+<% if logged_in? %>
+  <%= link_to 'プロフェッショナル一覧に戻る', professionals_path %>
+<% elsif logged_in_professional? %>
+  <%= link_to '相談部屋一覧に戻る', consultation_rooms_path %>
+<% end %>
+<br><br>
+
+<fotter>
+  <div class="company">© Picture Corp. All RIGHTS RESERVED.</div>
+</fotter>

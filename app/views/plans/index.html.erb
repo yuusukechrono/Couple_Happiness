@@ -1,32 +1,42 @@
-<header>ライフプラン一覧</header>
-
+<h2>ライフプラン一覧</h2>
 <br>
-<p>
+
 <%= current_user.last_name %> <%= current_user.first_name %>のプラン
-</p>
+
+<table>
+<th>目標日</th>
+<th>詳細</th>
+<th>編集</th>
+<th>削除</th>
 
 <% @current_user.plans.reverse_each do |plan| %>
   <tr>
-    <td><%= plan.plan_date %></td>
+    <td><%= plan.plan_set %></td>
     <td><%= plan.detail %></td>
     <td><%= link_to '編集', edit_plan_path(plan.id) %></td>
     <td><%= link_to '削除', plan_path(plan.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } %></td>
 <% end %>
+</table>
 <br><br>
+
 
 <% if (UserMatch.all.find_by(partner_id: current_user.id)).present?  %>
   <% if (UserMatch.all.find_by(party_id: current_user.id)).present?  %>
-    <p>
+    
     <% @user = User.all.find(UserMatch.all.find_by(party_id: current_user.id).partner_id) %>
     <%= @user.last_name %> <%= @user.first_name %>のプラン
-    </p>
+
+    <table>
+    <th>目標日</th>
+    <th>詳細</th>
 
     <% @user.plans.reverse_each do |plan| %>
       <tr>
-      <td><%= plan.plan_date %></td>
+      <td><%= plan.plan_set %></td>
       <td><%= plan.detail %></td>
-    </td>
+      </tr>
     <% end %>
+    </table>
   <% end %>
 <% end %>
 

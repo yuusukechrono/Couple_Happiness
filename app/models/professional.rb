@@ -4,4 +4,7 @@ class Professional < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length:{minimum: 6}
   mount_uploader:professional_image, ProfessionalImageUploader
+
+  has_many :consultation_rooms
+  has_many :messages
 end

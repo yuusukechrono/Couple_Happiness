@@ -1,7 +1,10 @@
-<header><b>質問一覧</b></header>
+<h2>質問一覧</h2>
 <br>
 <p><%= notice %></p>
-<br>
+<%= link_to 'トップ画面に移動する', users_path(@current_user.id) %>
+<br><br>
+<%= link_to '質問と回答の一覧に移動する', answers_path(:category => @category_for_answer) %>
+<br><br>
 
 <%= @category_for_answer %>
 <%= Category.all.find(@category_for_answer).detail %>
@@ -47,12 +50,7 @@
   <% end %>
   <br>
 <% end %> 
-<br>
-
-<%= link_to '質問と回答の一覧に移動する', answers_path(:category => @category_for_answer) %>
 <br><br>
-<%= link_to 'トップ画面に移動する', users_path(@current_user.id) %>
-<br>
 
 <fotter>
   <div class="company">© Picture Corp. All RIGHTS RESERVED.</div>

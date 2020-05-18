@@ -1,4 +1,4 @@
-<header>プロフェッショナルログイン</header>
+<h2>プロフェッショナルログイン</h2>
 <br>
 <% if logged_in_professional? %>
   <%= link_to "ログアウト", destroy_professional_sessions_path(current_professional.id) %>
@@ -7,6 +7,8 @@
   <%= link_to "プロフェッショナルアカウント作成", new_professional_path %>
   <br><br>
 <% end %>
+<%= link_to "ユーザーログインページ", new_session_path %>
+<br><br>
 
 <% flash.each do |key,value|%>
   <%= content_tag(:div, value, class:"#{key}") %>

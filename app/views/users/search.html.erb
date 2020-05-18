@@ -1,6 +1,8 @@
-<p>パートナー紐づけ</p>
-
+<h2>パートナー紐づけ</h2>
+<br>
 <p><%= notice %></p>
+<%= link_to 'トップ画面に移動', users_path(current_user.id) %>
+<br><br>
 
 <%= form_with url: search_users_path, method: :get, local: true do |f| %>
   <%= f.label :名字 %>
@@ -30,9 +32,7 @@
   <% end %>
   <% else %>
 <% end %>
-
 <br><br>
-<%= link_to 'トップ画面に移動する', users_path(current_user.id) %><br>
 
 <fotter>
   <div class="company">© Picture Corp. All RIGHTS RESERVED.</div>

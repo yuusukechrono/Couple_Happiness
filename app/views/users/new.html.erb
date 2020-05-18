@@ -1,4 +1,4 @@
-<header>新規登録</header>
+<h2>新規登録</h2>
 <br>
 <% if logged_in? %>
   <%= link_to "ログアウト", session_path(current_user.id), method: :delete %>
@@ -70,8 +70,8 @@
   <%= f.hidden_field  :image_cache %>
   <br>
   <%= f.submit "アカウントの作成" %>
-  <br>
 <% end %>
+<br><br>
 
 <fotter>
   <div class="company">© Picture Corp. All RIGHTS RESERVED.</div>

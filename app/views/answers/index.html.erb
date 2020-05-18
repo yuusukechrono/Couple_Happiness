@@ -1,44 +1,91 @@
-<header><b>質問と回答一覧</b></header>
+<h2>質問と回答一覧</h2>
+<br>
+<%= link_to 'トップ画面に移動する', users_path(@current_user.id) %>
 <br><br>
-<%= current_user.last_name %> <%= current_user.first_name %>の回答状況
-<br><br>
-
 <%= link_to '質問に答える', answer_to_question_answers_path(:category_for_answer => @category) %>
-<br><br>
+<br><br><br>
 
 <%= @category %>
 <%= Category.all.find(@category).detail %>
 <br><br>
 
-<% @questions = Question.where(category_id: @category) %>
-<% j = 1 %>
-<% @questions.each do |question| %>
-  Q.<%= j %><%= question.detail %><br>
-  <% @answer = Answer.find_by("(question_id = ?) and (user_id = ?)" , question.id, current_user.id) %>
-  <% if @answer.present? %>
-    <% if @answer.answer == "1" %>
-      <%= question.answer_left %>
-      <br>
-      <%= @answer.answer_detail %>
-    <% elsif @answer.answer == "2" %>
-      <%= question.answer_right %>
-      <br>
-      <%= @answer.answer_detail %>
-    <% else %>
-      "未回答"
-    <% end %>
-    <br>
-  <% else %>
-    "未回答"
-    <br>
-  <% end %>
-  <% j +=1 %> 
-  <br>
-<% end %> 
+<%= current_user.last_name %> <%= current_user.first_name %>の回答状況
 <br><br>
 
-<%= link_to 'トップ画面に移動する', users_path(@current_user.id) %>
-<br>
+<% @questions = Question.where(category_id: @category) %>
+<% j = 1 %>
+
+<table border = "1">
+<th>質問</th>
+<th>回答</th>
+<th>詳細</th>
+
+<% @questions.each do |question| %>
+  <tr>
+  <td>Q.<%= j %><%= question.detail %></td>
+  <% @answer = Answer.find_by("(question_id = ?) and (user_id = ?)" , question.id, current_user.id) %>
+
+  <% if @answer.present? %>
+    <% if @answer.answer == "1" %>
+      <td><%= question.answer_left %></td>
+      <td><%= @answer.answer_detail %></td>
+    <% elsif @answer.answer == "2" %>
+      <td><%= question.answer_right %></td>
+      <td><%= @answer.answer_detail %></td>
+    <% else %>
+      <td>"未回答"</td>
+      <td></td>
+    <% end %>
+  <% else %>
+    <td>"未回答"</td>
+    <td></td>
+  <% end %>
+  </tr>
+  <% j += 1 %>
+<% end %> 
+</table>
+<br><br>
+
+<% if (UserMatch.all.find_by(partner_id: current_user.id)).present?  %>
+  <% if (UserMatch.all.find_by(party_id: current_user.id)).present?  %>
+    <% @user = User.all.find(UserMatch.all.find_by(party_id: current_user.id).partner_id) %>
+    <%= @user.last_name %> <%= @user.first_name %>の回答状況
+    <% j = 1 %>
+    <table border = "1">
+    <th>質問</th>
+    <th>回答</th>
+    <th>詳細</th>
+
+    <% @questions.each do |question| %>
+      <tr>
+      <td>Q.<%= j %><%= question.detail %></td>
+
+      <% @answer = Answer.find_by("(question_id = ?) and (user_id = ?)" , question.id, @user.id) %>
+      
+      <% if @answer.present? %>
+        <% if @answer.answer == "1" %>
+          <td><%= question.answer_left %></td>
+          <td><%= @answer.answer_detail %></td>
+        <% elsif @answer.answer == "2" %>
+          <td><%= question.answer_right %></td>
+          <td><%= @answer.answer_detail %></td>
+        <% else %>
+          <td>"未回答"</td>
+          <td></td>
+          <% end %>
+      <% else %>
+        <td>"未回答"</td>
+        <td></td>
+      <% end %>
+
+      <% j += 1 %>
+      </tr> 
+    <% end %>
+    
+    </table> 
+  <% end %>
+<% end %>
+<br><br>
 
 <fotter>
   <div class="company">© Picture Corp. All RIGHTS RESERVED.</div>

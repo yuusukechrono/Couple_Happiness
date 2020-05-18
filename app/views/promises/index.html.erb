@@ -1,38 +1,41 @@
-<header>家訓一覧</header>
+<h2>家訓一覧</h2>
 <p><%= notice %></p>
-
 <br>
+<%= link_to 'トップ画面に移動', users_path(@current_user.id) %>
+<br><br>
+<%= link_to '家訓を登録', new_promise_path %>
+<br><br>
+
+<table>
+<th>カテゴリー</th>
+<th>詳細</th>
+<th>編集</th>
+<th>削除</th>
+
 <% @current_user.promises.reverse_each do |promise| %>
   <tr>
     <td><%= promise.category.detail %></td>
     <td><%= promise.detail %></td>
     <td><%= link_to '編集', edit_promise_path(promise.id) %></td>
     <td><%= link_to '削除', promise_path(promise.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } %></td>
+  </tr>
 <% end %>
-<br>
 
 <% if (UserMatch.all.find_by(partner_id: current_user.id)).present?  %>
   <% if (UserMatch.all.find_by(party_id: current_user.id)).present?  %>
     <% @user = User.all.find(UserMatch.all.find_by(party_id: current_user.id).partner_id) %>
-
     <% @user.promises.reverse_each do |promise| %>
       <tr>
-      <td><%= promise.category.detail %></td>
-      <td><%= promise.detail %></td>
-      <td><%= link_to '編集', edit_promise_path(promise.id) %></td>
-    <td><%= link_to '削除', promise_path(promise.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } %></td>
-
-    </td>
+        <td><%= promise.category.detail %></td>
+        <td><%= promise.detail %></td>
+        <td><%= link_to '編集', edit_promise_path(promise.id) %></td>
+        <td><%= link_to '削除', promise_path(promise.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } %></td>
+      </tr>
     <% end %>
   <% end %>
 <% end %>
-
-<br><br>
-<%= link_to '家訓を登録する', new_promise_path %>
-<br><br>
-
-<%= link_to 'トップ画面に移動する', users_path(@current_user.id) %><br>
-
+</table>
+<br><br>    
 
 <fotter>
   <div class="company">© Picture Corp. All RIGHTS RESERVED.</div>

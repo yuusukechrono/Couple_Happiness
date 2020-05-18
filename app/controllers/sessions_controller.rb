@@ -21,7 +21,6 @@ class SessionsController < ApplicationController
       session[:professional_id] = professional.id
       redirect_to professional_path(professional.id)
     else
-      binding.irb
       flash.now[:danger] = 'ログインに失敗しました'
       redirect_to new_professional_sessions_path
     end

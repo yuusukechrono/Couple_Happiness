@@ -1,0 +1,2 @@
+module ConsultationRoomsHelper
+end

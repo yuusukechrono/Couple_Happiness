@@ -1,12 +1,13 @@
 <% @professional = Professional.all %>
-<header>プロフェッショナル一覧</header>
+<h2>プロフェッショナル一覧</h2>
 <br>
-<table>
+<table border="1">
   <tr>
   <th></th>
   <th>名前</th>
   <th>サービス名</th>
   <th>詳細</th>
+  <th>相談</th>
   </tr>
 
 <% @professional.reverse_each do |professional| %>
@@ -15,6 +16,7 @@
     <td><%= professional.last_name %><%= professional.first_name %></td>
     <td><%= professional.service_name %></td>
     <td><%= professional.self_introduction %></td>
+    <td><%= link_to 'メッセージ', consultation_rooms_path(sender_id: current_user.id, recipient_id: professional.id), method: :post %></td>
   </tr>
 <% end %>
 </table>

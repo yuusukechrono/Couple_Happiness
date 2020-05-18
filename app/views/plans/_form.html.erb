@@ -1,4 +1,7 @@
-<header><b>ライフプラン登録</b></header><br>
+<h2>ライフプラン登録</h2>
+<br><br>
+<%= link_to 'ライフプラン一覧', plans_path %>
+<br><br>
 
 <%= form_with(model: @plan, local: true) do |plan| %>
   <% if @plan.errors.any? %>
@@ -22,7 +25,5 @@
   <%= plan.submit '登録する' %><br><br>
 
 <% end %>
-
-<%= link_to '戻る', plans_path %>
 
 

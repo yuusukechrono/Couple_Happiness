@@ -1,71 +1,78 @@
-<%= link_to "ログアウト", session_path(current_user.id), method: :delete %>  
-<%= link_to 'ユーザー編集', edit_user_path(current_user.id) %><br><br>
+<h2>ユーザーページ</h2>
+<%= link_to "ログアウト", session_path(current_user.id), method: :delete %>
+<br><br>
+<%= link_to 'ユーザー編集', edit_user_path(current_user.id) %>
+<br><br>
 
-<p>
-<%= image_tag(current_user.image.url, size:'80x80')  if current_user.image.present?%>        
-<br>
-<%= current_user.last_name %> <%= current_user.first_name %>
-</p>
-
+<table border="1">
+<tr>
+<td>自分</td>
+<td><%= image_tag(current_user.image.url, size:'80x80')  if current_user.image.present?%></td>
+<td><%= current_user.last_name %> <%= current_user.first_name %></td>
+</tr>
 
 <% if (UserMatch.all.find_by(partner_id: current_user.id)).present?  %>
   <% if (UserMatch.all.find_by(party_id: current_user.id)).present?  %>
+    <td>パートナー</td>
+    <td><%= image_tag(User.all.find_by(id: UserMatch.all.find_by(party_id: current_user.id).partner_id).image.url, size:'80x80') if User.all.find_by(id: UserMatch.all.find_by(party_id: current_user.id).partner_id).image.url.present?%></td>
 
-    <p>
-    <%= image_tag(User.all.find_by(id: UserMatch.all.find_by(party_id: current_user.id).partner_id).image.url, size:'80x80') if User.all.find_by(id: UserMatch.all.find_by(party_id: current_user.id).partner_id).image.url.present?%>        
-      <br>
-    <%= User.all.find_by(id: UserMatch.all.find_by(party_id: current_user.id).partner_id).last_name %>
-    <%= User.all.find_by(id: UserMatch.all.find_by(party_id: current_user.id).partner_id).first_name %>
-    </p>
-
+    <td><%= User.all.find_by(id: UserMatch.all.find_by(party_id: current_user.id).partner_id).last_name %><%= User.all.find_by(id: UserMatch.all.find_by(party_id: current_user.id).partner_id).first_name %></td>
   <% end %>
 <% end %>
+</table>
+<br>
 
-<%= link_to 'パートナー検索', search_users_path %>
+<% if (UserMatch.all.find_by(party_id: current_user.id)).present? %>
+<%#= 申請済みなら表示しない %>
+<% else %>
+  <%= link_to 'パートナー検索', search_users_path %>
+  <br><br>
+<% end %>
+
 <% if (UserMatch.all.find_by(partner_id: current_user.id)).present? %>
   <% if (UserMatch.all.find_by(party_id: current_user.id)).present? %>
+  <%#= 相手が申請し、自分も申請している%>
   <% else %>
-
+  <%#= 相手が申請し、自分は申請していない%>
     <%= form_with model: UserMatch.new, local: true do |f| %>
       <%= f.hidden_field :party_id, value: current_user.id %>
       <%= f.hidden_field :partner_id, value: UserMatch.all.find_by(partner_id: current_user.id).party_id %>
       <%= f.hidden_field :confirmation_status, value: 1 %>   
       <%= 'パートナーから申請が来ています！'%>
       <%= f.submit :承認する %>
-
-  <% end %>
-
+      <br><br>
+    <% end %>
   <% end %>
 <% end %>
 
+<%= link_to 'ライフプラン', plans_path %>
 <br><br>
 
-<%= link_to 'ライフプランを見る', plans_path %>
-<br><br>
-
-<%= link_to '家訓を見る', promises_path %>
+<%= link_to '家訓', promises_path %>
 <br><br>
 
 質問カテゴリー<br>
-<%= link_to '1.結婚', answers_path(:category => 1) %><br>
-<%= link_to '2.趣味', answers_path(:category => 2) %><br>
-<%= link_to '3.食事', answers_path(:category => 3) %><br>
-<%= link_to '4.イベント', answers_path(:category => 4) %><br>
-<%= link_to '5.仕事', answers_path(:category => 5) %><br>
-<%= link_to '6.住居', answers_path(:category => 6) %><br>
-<%= link_to '7.家事', answers_path(:category => 7) %><br>
-<%= link_to '8.服', answers_path(:category => 8) %><br>
-<%= link_to '9.お金', answers_path(:category => 9) %><br>
-<%= link_to '10.子育て', answers_path(:category => 10) %><br>
-<%= link_to '11.家族', answers_path(:category => 11) %><br>
-<%= link_to '12.介護', answers_path(:category => 12) %><br>
-<%= link_to '13.友人', answers_path(:category => 13) %><br>
-<%= link_to '14.美容', answers_path(:category => 14) %><br>
-<%= link_to '15.健康', answers_path(:category => 15) %><br>
-<%= link_to '16.性生活', answers_path(:category => 16) %><br>
+<table>
+<tr><td><%= link_to '1.結婚', answers_path(:category => 1) %></td></tr>
+<tr><td><%= link_to '2.趣味', answers_path(:category => 2) %></td></tr>
+<tr><td><%= link_to '3.食事', answers_path(:category => 3) %></td></tr>
+<tr><td><%= link_to '4.イベント', answers_path(:category => 4) %></td></tr>
+<tr><td><%= link_to '5.仕事', answers_path(:category => 5) %></td></tr>
+<tr><td><%= link_to '6.住居', answers_path(:category => 6) %></td></tr>
+<tr><td><%= link_to '7.家事', answers_path(:category => 7) %></td></tr>
+<tr><td><%= link_to '8.服', answers_path(:category => 8) %></td></tr>
+<tr><td><%= link_to '9.お金', answers_path(:category => 9) %></td></tr>
+<tr><td><%= link_to '10.子育て', answers_path(:category => 10) %></td></tr>
+<tr><td><%= link_to '11.家族', answers_path(:category => 11) %></td></tr>
+<tr><td><%= link_to '12.介護', answers_path(:category => 12) %></td></tr>
+<tr><td><%= link_to '13.友人', answers_path(:category => 13) %></td></tr>
+<tr><td><%= link_to '14.美容', answers_path(:category => 14) %></td></tr>
+<tr><td><%= link_to '15.健康', answers_path(:category => 15) %></td></tr>
+<tr><td><%= link_to '16.性生活', answers_path(:category => 16) %></td></tr>
+</table>
 <br><br>
 
-<%= link_to 'プロフェッショナルに相談する', professionals_path %>
+<%= link_to 'プロフェッショナルに相談', professionals_path %>
 <br><br>
 
 <fotter>

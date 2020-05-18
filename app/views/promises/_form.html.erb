@@ -1,5 +1,11 @@
-<header><b>家訓登録</b></header><br>
+<h2>家訓登録</h2>
 <p><%= notice %></p>
+<br>
+<%= link_to 'トップ画面に移動', users_path(@current_user.id) %>
+<br><br>
+<%= link_to '家訓一覧', promises_path %>
+<br><br>
+
 <%= form_with(model: @promise, local: true) do |promise| %>
   <% if @promise.errors.any? %>
     <div id="error_explanation">
@@ -22,7 +28,5 @@
   <%= promise.submit '登録する' %><br><br>
 
 <% end %>
-
-<%= link_to '戻る', promises_path %>
 
 
