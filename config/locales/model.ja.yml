@@ -7,7 +7,63 @@ ja:
       material_status: 未婚・結婚
       birthday: 誕生日
       blood_type: 血液型
-      partner_id: パートナーのID
       email: メールアドレス
       password_digest: パスワード
       image: 画像
+    user_match:
+      confirmation_status: ステータス
+      confirmation_date: 確認日
+      party_id: ユーザーID
+      partner_id: パートナーID
+    professional:
+      email: メールアドレス
+      password_digest: パスワード
+      last_name: 名字
+      first_name: 名前
+      sex: 性別
+      category: カテゴリー 
+      self_introduction: アピールポイント
+      service_name: サービス名
+      price: 価格
+      bank: 銀行
+      branch: 支店
+      branch_number: 支店番号
+      account: 口座名
+      account_number: 口座番号
+    category:
+      ddetail: カテゴリー詳細
+    question:
+      detail: 質問内容
+      anwwer_right: 右の答え
+      answer_left: 左の答え
+      beginner: 初心者向けFlg
+    answer:
+      answer: 回答
+      answer_detail: 記述回答
+      user_id: ユーザーID
+      question_id: 質問ID
+    promise:
+      detail: 約束の詳細
+      user_id: ユーザーID
+      category_id: カテゴリーID
+    plan:
+      plan_date: 予定日
+      detail: プランの詳細
+      user_id: ユーザーID 
+    meetig:
+      subject: 議題
+      memo: 議事録
+      category_id: カテゴリーID
+      user_id: ユーザーID
+    consultation_room:
+      sender_id: ユーザーID
+      recipient_id: プロID
+    message:
+      body: メッセージ内容
+      consultation_room_id: 相談部屋ID
+      user_id: ユーザーID
+      professional_id: プロID
+      read: 既読・未読
+    
+
+    
