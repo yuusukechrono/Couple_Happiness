@@ -13,7 +13,7 @@ Rails.application.configure do
 
   config.assets.js_compressor = :uglifier
 
-  config.assets.compile = ture
+  config.assets.compile = true
   # falesに戻す？
   
   config.active_storage.service = :local
