@@ -1,23 +1,6 @@
 <h2><%= @consultation_room.user.last_name %><%= @consultation_room.user.first_name %>　と　<%= @consultation_room.professional.last_name %><%= @consultation_room.professional.first_name %>の相談部屋</h2>
 <br><br>
 
-<% @aoges = @messages.where(user_id: @consultation_room.user.id) %>
-<% @aoges.each do |aoge| %>
-  <%= aoge.body %>
-<% end %>  
-
-
-<% @hoges = @messages.where.not(professional_id: @consultation_room.professional.id) %>
-<% @hoges.each do |hoge| %>
-  <%= hoge.body %>
-<% end %>  
-
-
-
-
-
-
-
 <% if @over_ten %>
   <%= link_to '以前のメッセージ', '?m=all' %>
 <% end %>
