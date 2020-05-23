@@ -4,7 +4,7 @@ Rails.application.configure do
 
   config.eager_load = true
 
-  config.consider_all_requests_local = true
+  config.consider_all_requests_local = false
    # falesに戻す？
 
   config.action_controller.perform_caching = true
@@ -13,7 +13,7 @@ Rails.application.configure do
 
   config.assets.js_compressor = :uglifier
 
-  config.assets.compile = true
+  config.assets.compile = false
   # falesに戻す？
   
   config.active_storage.service = :local

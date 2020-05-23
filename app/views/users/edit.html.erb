@@ -65,14 +65,11 @@
     date_separator: '/') %>
   <br>
 
-  <%= f.label :パートナーID %>
-  <%= f.password_field :partner_id %>
-
   <%= f.label :写真をアップロード %>
   <%= f.file_field  :image %>
   <%= f.hidden_field  :image_cache %>
   <br>
-  <%= f.submit "アカウントの変更",class: 'btn btn-primary'  %>
+  <%= f.submit "アカウントの変更" %>
   <br><br>
 <% end %>
 <%= link_to 'トップ画面に移動する', users_path(@user.id), class: 'btn btn-primary'  %>
