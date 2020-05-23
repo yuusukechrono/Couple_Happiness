@@ -1,5 +1,10 @@
 <h2>ライフプラン一覧</h2>
 <br>
+<%= link_to 'トップ画面に移動する', users_path(@current_user.id) %><br>
+<br><br>
+<%= link_to 'ライフプランを登録する', new_plan_path %>
+<br><br>
+
 
 <%= current_user.last_name %> <%= current_user.first_name %>のプラン
 
@@ -15,10 +20,10 @@
     <td><%= plan.detail %></td>
     <td><%= link_to '編集', edit_plan_path(plan.id) %></td>
     <td><%= link_to '削除', plan_path(plan.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } %></td>
+  </tr>
 <% end %>
 </table>
 <br><br>
-
 
 <% if (UserMatch.all.find_by(partner_id: current_user.id)).present?  %>
   <% if (UserMatch.all.find_by(party_id: current_user.id)).present?  %>
@@ -39,14 +44,8 @@
     </table>
   <% end %>
 <% end %>
-
 <br><br>
-<%= link_to 'ライフプランを登録する', new_plan_path %>
-<br><br>
-
-<%= link_to 'トップ画面に移動する', users_path(@current_user.id) %><br>
-
 
 <fotter>
-  <div class="company">© Picture Corp. All RIGHTS RESERVED.</div>
+  <div class="company">© Couple Happiness Corp. All RIGHTS RESERVED.</div>
 </fotter>

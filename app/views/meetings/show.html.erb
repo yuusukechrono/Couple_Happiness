@@ -1,0 +1,19 @@
+<h2>議事録詳細</h2>
+<br>
+<%= link_to 'トップ画面に移動する', users_path(@current_user.id) %><br>
+<br><br>
+<%= link_to '議事録一覧', meetings_path %>
+<br>
+<%= link_to '議事録編集', edit_meeting_path(@meeting.id) %>
+<br><br>
+
+カテゴリー:　<%= Category.all.find_by(id: @meeting.category_id).detail %><br>
+議題:　<%= @meeting.subject %><br>
+議事録<br>
+<%= @meeting.memo %><br>
+
+<br><br>
+
+<fotter>
+  <div class="company">© Couple Happiness Corp. All RIGHTS RESERVED.</div>
+</fotter>

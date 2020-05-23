@@ -1,0 +1,36 @@
+<h2>議事録作成</h2>
+<br>
+<%= link_to 'トップ画面に移動する', users_path(@current_user.id) %><br>
+<br><br>
+<%= link_to '議事録一覧', meetings_path %>
+<br><br>
+
+<%= form_with(model: @meeting, local: true) do |meeting| %>
+  <% if @meeting.errors.any? %>
+    <div id="error_explanation">
+      <p><%= @meeting.errors.count %>件のエラーがあります。</p>
+      <ul>
+      <% @meeting.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= meeting.label :カテゴリー %><br>
+  <%= meeting.select :category_id, [["結婚", 1], ["趣味", 2], ["食事", 3], ["イベント", 4],  ["仕事", 5],  ["住居", 6],  ["家事", 7],  ["服", 8],  ["お金", 9],  ["子育て", 10],  ["家族", 11],  ["介護", 12],  ["友人", 13],  ["美容", 14],  ["健康", 15],  ["性生活", 16]], include_blank: "選択して下さい" %><br>
+
+  <%= meeting.label :議題 %><br>
+  <%= meeting.text_area :subject %><br>
+
+  <%= meeting.label :議事録 %><br>
+  <%= meeting.text_area :memo %><br>
+
+  <br><br>
+  <%= meeting.submit '登録する' %>
+<% end %>
+<br><br>
+
+<fotter>
+  <div class="company">© Couple Happiness Corp. All RIGHTS RESERVED.</div>
+</fotter>

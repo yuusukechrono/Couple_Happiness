@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   end
   resources :plans
   resources :promises
+  resources :meetings
   resources :user_matches
   resources :answers do   
     collection do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_17_155250) do
+ActiveRecord::Schema.define(version: 2020_05_18_154210) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,17 @@ ActiveRecord::Schema.define(version: 2020_05_17_155250) do
     t.datetime "updated_at", null: false
     t.index ["recipient_id"], name: "index_consultation_rooms_on_recipient_id"
     t.index ["sender_id"], name: "index_consultation_rooms_on_sender_id"
+  end
+
+  create_table "meetings", force: :cascade do |t|
+    t.bigint "category_id"
+    t.text "subject"
+    t.text "memo"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_meetings_on_category_id"
+    t.index ["user_id"], name: "index_meetings_on_user_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -132,6 +143,8 @@ ActiveRecord::Schema.define(version: 2020_05_17_155250) do
 
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
+  add_foreign_key "meetings", "categories"
+  add_foreign_key "meetings", "users"
   add_foreign_key "messages", "consultation_rooms"
   add_foreign_key "messages", "professionals"
   add_foreign_key "messages", "users"

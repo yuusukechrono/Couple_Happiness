@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :answers
   has_many :plans
   has_many :promises
+  has_many :meetings
   has_many :consultation_rooms
   has_many :messages
 
