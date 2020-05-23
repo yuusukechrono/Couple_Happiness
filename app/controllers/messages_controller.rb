@@ -17,11 +17,11 @@ class MessagesController < ApplicationController
 
     if logged_in?
       if @messages.last
-        @messages.where.not(user_id: current_user.id).update_all(read: true)
+        @messages.where(professional_id: @consultation_room.professional.id).update_all(read: true)
       end
     elsif logged_in_professional?
       if @messages.last
-        @messages.where.not(professional_id: current_professional.id).update_all(read: true)
+        @messages.where(user_id: @consultation_room.user.id).update_all(read: true)
       end
     else
     end

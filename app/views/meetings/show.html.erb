@@ -7,7 +7,7 @@
 <%= link_to '議事録編集', edit_meeting_path(@meeting.id) %>
 <br><br>
 
-カテゴリー:　<%= Category.all.find_by(id: @meeting.category_id).detail %><br>
+カテゴリー:　<%= @meeting.category.detail %><br>
 議題:　<%= @meeting.subject %><br>
 議事録<br>
 <%= @meeting.memo %><br>

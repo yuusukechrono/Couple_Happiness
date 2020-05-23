@@ -14,7 +14,7 @@
 
 <% @current_user.meetings.reverse_each do |meeting| %>
   <tr>
-    <td><%= Category.all.find_by(id:meeting.category_id).detail %></td>
+    <td><%= meeting.category.detail %></td>
     <td><%= meeting.subject %></td>
     <td><%= link_to '閲覧', meeting_path(meeting.id) %></td>
     <td><%= link_to '編集', edit_meeting_path(meeting.id) %></td>
@@ -27,7 +27,7 @@
     <% @user = User.all.find(UserMatch.all.find_by(party_id: current_user.id).partner_id) %>
     <% @user.meetings.reverse_each do |meeting| %>
       <tr>
-      <td><%= Category.all.find_by(id:meeting.category_id).detail %></td>
+      <td><%= meeting.category.detail %></td>
       <td><%= meeting.subject %></td>
       <td><%= link_to '閲覧', meeting_path(meeting.id) %></td>
       <td><%= link_to '編集', edit_meeting_path(meeting.id) %></td>
