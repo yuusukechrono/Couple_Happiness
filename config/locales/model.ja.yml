@@ -29,8 +29,7 @@ ja:
       branch: 支店
       branch_number: 支店番号
       account: 口座名
-      account_number: 口
-      座番号
+      account_number: 口座番号
     category:
       ddetail: カテゴリー詳細
     question:
