@@ -1,86 +1,98 @@
-<header>プロフェッショナル情報編集</header>
-<br>
-<% if logged_in_professional? %>
-  <%= link_to "ログアウト", destroy_professional_sessions_path(current_professional.id) %>
-  <br><br>
-  <% else %>
-  <%= link_to 'トップ画面に移動する', professional_path(current_professional.id) %><br>
-  <br><br>
-<% end %>
+<div class="container">
+  <div class="col-xs-1"></div>
+  <div class="col-xs-10">
+    <nav class = "navbar navbar-default">
+      <div class = "container-fluid">
+        <div class = "navbar-header">
+          <button type = "button" class="navbar-toggle collapsed" data-toggle="collapse" data-target ="#gnavi">
+            <span class = "sr-only">Couple Happiness</span>
+            <span class = "icon-bar"></span>
+            <span class = "icon-bar"></span>
+            <span class = "icon-bar"></span>
+          </button>
+          <a class = "navbar-brand">Couple Happness</a>
+        </div>
+        <div id="gnavi" class="collapse navbar-collapse">
+          <ul class = "nav navbar-nav">
+          <li><%= link_to 'トップ画面', professional_path(current_professional.id) %><li>
+          <li><%= link_to '相談部屋', consultation_rooms_path %></li>
+            <li><%= link_to "ログアウト", destroy_professional_sessions_path(current_professional.id) %></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-<% if @professional.errors.any? %>
-  <div id="error_explanation">
-    <h1><%= pluralize(@professional.errors.count, "error") %> prohibited this @professional from being saved:</h1>
-    <ul>
-      <% @professional.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
+    <header>プロフェッショナル情報編集</header>
+    <br>
+
+    <% if @professional.errors.any? %>
+      <div id="error_explanation">
+        <h1><%= pluralize(@professional.errors.count, "error") %> prohibited this @professional from being saved:</h1>
+        <ul>
+          <% @professional.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= form_with(model: @professional, local: true) do |f| %>
+      <%= f.label :名字 %>
+      <%= f.text_field :last_name %>
+      <br>
+      <%= f.label :名前 %>
+      <%= f.text_field :first_name %>
+      <br> 
+      <%= f.label :メールアドレス %>
+      <%= f.email_field :email %>
+      <br>
+      <%= f.label :パスワード %>
+      <%= f.password_field:password %>
+      <br>
+      <%= f.label :パスワード（確認） %>
+      <%= f.password_field :password_confirmation %>
+      <br>
+      <%= f.label :性別 %>
+      <%= f.radio_button :sex, :male %>
+      <%= f.label :sex, "男性", {value: :male, style: "display: inline-block;"} %>
+      <%= f.radio_button :sex, :female %>
+      <%= f.label :sex, "女性", {value: :female, style: "display: inline-block;"} %>
+      <br>
+      <%= f.label :アピールポイント %>
+      <%= f.text_area :self_introduction %>
+      <br>
+      <%= f.label :サービス名 %>
+      <%= f.text_area :service_name %>
+      <br>
+      <%= f.label :価格 %>
+      <%= f.text_field :price %>
+      <br>
+      <%= f.label :金融機関 %>
+      <%= f.text_field :bank %>
+      <br>
+      <%= f.label :支店 %>
+      <%= f.text_field :branch %>
+      <br>
+      <%= f.label :支店番号 %>
+      <%= f.text_field :branch_number %>
+      <br>
+      <%= f.label :口座名 %>
+      <%= f.text_field :account %>
+      <br>
+      <%= f.label :口座番号 %>
+      <%= f.text_field :account_number %>
+      <br>
+      <%= f.label :写真をアップロード %>
+      <%= f.file_field :professional_image %>
+      <%= f.hidden_field :professional_image_cache %>
+      <br>
+      <%= f.submit "アカウントの変更"  %>
+      <br><br>
+    <% end %>
+
+    <footer>
+      <div class="company">© Couple Happiness Corp. All RIGHTS RESERVED.</div>
+    </footer>
   </div>
-<% end %>
-
-<%= form_with(model: @professional, local: true) do |f| %>
-  
-  <%= f.label :名字 %>
-  <%= f.text_field :last_name %>
-  <br>
-  <%= f.label :名前 %>
-  <%= f.text_field :first_name %>
-  <br> 
-  
-  <%= f.label :メールアドレス %>
-  <%= f.email_field :email %>
-  <br>
-  <%= f.label :パスワード %>
-  <%= f.password_field:password %>
-  <br>
-  <%= f.label :パスワード（確認） %>
-  <%= f.password_field :password_confirmation %>
-  <br>
-
-  <%= f.label :性別 %>
-  <%= f.radio_button :sex, :male %>
-  <%= f.label :sex, "男性", {value: :male, style: "display: inline-block;"} %>
-  <%= f.radio_button :sex, :female %>
-  <%= f.label :sex, "女性", {value: :female, style: "display: inline-block;"} %>
-  <br>
-
-  <%= f.label :アピールポイント %>
-  <%= f.text_area :self_introduction %>
-  <br>
-  <%= f.label :サービス名 %>
-  <%= f.text_area :service_name %>
-  <br>
-  <%= f.label :価格 %>
-  <%= f.text_field :price %>
-  <br>
-
-  <%= f.label :金融機関 %>
-  <%= f.text_field :bank %>
-  <br>
-  <%= f.label :支店 %>
-  <%= f.text_field :branch %>
-  <br>
-  <%= f.label :支店番号 %>
-  <%= f.text_field :branch_number %>
-  <br>
-  <%= f.label :口座名 %>
-  <%= f.text_field :account %>
-  <br>
-  <%= f.label :口座番号 %>
-  <%= f.text_field :account_number %>
-  <br>
-
-  <%= f.label :写真をアップロード %>
-  <%= f.file_field :professional_image %>
-  <%= f.hidden_field :professional_image_cache %>
-
-  <br>
-  <%= f.submit "アカウントの変更"  %>
-  <br><br>
-
-<% end %>
-
-<fotter>
-  <div class="company">© Couple Happiness Corp. All RIGHTS RESERVED.</div>
-</fotter>
+  <div class="col-xs-1"></div>
+</div>

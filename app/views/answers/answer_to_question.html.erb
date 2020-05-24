@@ -1,57 +1,83 @@
-<h2>質問一覧</h2>
-<br>
-<p><%= notice %></p>
-<%= link_to 'トップ画面に移動する', users_path(@current_user.id) %>
-<br><br>
-<%= link_to '質問と回答の一覧に移動する', answers_path(:category => @category_for_answer) %>
-<br><br>
+<div class="container">
+  <div class="col-xs-1"></div>
+  <div class="col-xs-10">
+    <nav class = "navbar navbar-default">
+      <div class = "container-fluid">
+        <div class = "navbar-header">
+          <button type = "button" class="navbar-toggle collapsed" data-toggle="collapse" data-target ="#gnavi">
+            <span class = "sr-only">Couple Happiness</span>
+            <span class = "icon-bar"></span>
+            <span class = "icon-bar"></span>
+            <span class = "icon-bar"></span>
+          </button>
+          <a class = "navbar-brand">Couple Happness</a>
+        </div>
+        <div id="gnavi" class="collapse navbar-collapse">
+          <ul class = "nav navbar-nav">
+            <li><%= link_to 'トップ画面', users_path(@current_user.id) %></li>
+            <li><%= link_to 'ライフプラン', plans_path %></li>
+            <li><%= link_to '家訓', promises_path %></li>
+            <li><%= link_to '議事録', meetings_path %></li>
+            <li><%= link_to 'プロに相談', professionals_path %></li>
+            <li><%= link_to 'ユーザー編集', edit_user_path(current_user.id) %></li>
+            <li class = "nav navbar-right"><%= link_to "ログアウト", session_path(current_user.id), method: :delete %></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-<%= @category_for_answer %>
-<%= Category.all.find(@category_for_answer).detail %>
-<br>
+    <h2 class="title2">質問一覧</h2>
+    <br>
+    <p><%= notice %></p>
+    <button type="button" class="btn btn-info rounded-pill btn-lg"><%= link_to '質問と回答の一覧に移動する', answers_path(:category => @category_for_answer) %></button>
+    <br><br>
 
-<% @questions = Question.where(category_id: @category_for_answer) %>
-<% j = 1 %>
+    <h2><%= @category_for_answer %>.<%= Category.all.find(@category_for_answer).detail %></h2>
+    <br>
 
-<% @questions.each do |question| %>
-  Q.<%= j %><%= question.detail %><br>
-  <% j +=1 %> 
+    <% @questions = Question.where(category_id: @category_for_answer) %>
+    <% j = 1 %>
 
-  <% @answer = Answer.find_by("(question_id = ?) and (user_id = ?)" , question.id, current_user.id) %>
-  <% if @answer.present? %>
-     
-    <%= form_with model: Answer.find(@answer.id), local: true do |a| %>
-      <%= a.radio_button :answer, 1 %>
-      <%= a.label :answer, question.answer_left %>
-      <%= a.radio_button :answer, 2 %>
-      <%= a.label :answer, question.answer_right %>
-      <br>
-      <%= a.label :詳細（細かく記載したい場合お使いください） %><br>
-      <%= a.text_area :answer_detail %>
-      <%= a.hidden_field :user_id, value: current_user.id %>   
-      <%= a.hidden_field :question_id, value: question.id %>   
-      <%= a.submit :申請する %>
-    <% end %>
+    <div class="question_a">
+    <% @questions.each do |question| %>
+      Q.<%= j %><%= question.detail %><br>
+      <% j +=1 %> 
+      <% @answer = Answer.find_by("(question_id = ?) and (user_id = ?)" , question.id, current_user.id) %>
 
-  <% else %>
+      <% if @answer.present? %>
+        <%= form_with model: Answer.find(@answer.id), local: true do |a| %>
+          <%= a.radio_button :answer, 1 %>
+          <%= a.label :answer, question.answer_left %>
+          <%= a.radio_button :answer, 2 %>
+          <%= a.label :answer, question.answer_right %>
+          <br>
+          <%= a.label :詳細（細かく記載したい場合お使いください） %><br>
+          <%= a.text_area :answer_detail %>
+          <%= a.hidden_field :user_id, value: current_user.id %>   
+          <%= a.hidden_field :question_id, value: question.id %>   
+          <%= a.submit :申請する %>
+        <% end %>
+      <% else %>
+        <%= form_with model: Answer.new, local: true do |a| %>
+          <%= a.radio_button :answer, 1 %>
+          <%= a.label :answer, question.answer_left %>
+          <%= a.radio_button :answer, 2 %>
+          <%= a.label :answer, question.answer_right %>
+          <br>
+          <%= a.label :詳細（細かく記載したい場合お使いください） %><br>
+          <%= a.text_area :answer_detail %>
+          <%= a.hidden_field :user_id, value: current_user.id %>   
+          <%= a.hidden_field :question_id, value: question.id %>   
+          <%= a.submit :申請する %>
+        <% end %>
+      <% end %>
+    <% end %> 
+    </div>
+    <br><br>
 
-    <%= form_with model: Answer.new, local: true do |a| %>
-      <%= a.radio_button :answer, 1 %>
-      <%= a.label :answer, question.answer_left %>
-      <%= a.radio_button :answer, 2 %>
-      <%= a.label :answer, question.answer_right %>
-      <br>
-      <%= a.label :詳細（細かく記載したい場合お使いください） %><br>
-      <%= a.text_area :answer_detail %>
-      <%= a.hidden_field :user_id, value: current_user.id %>   
-      <%= a.hidden_field :question_id, value: question.id %>   
-      <%= a.submit :申請する %>
-    <% end %>
-  <% end %>
-  <br>
-<% end %> 
-<br><br>
-
-<fotter>
-  <div class="company">© Couple Happiness. All RIGHTS RESERVED.</div>
-</fotter>
+    <footer>
+      <div class="company">© Couple Happiness. All RIGHTS RESERVED.</div>
+    </footer>
+  </div>
+  <div class="col-xs-1"></div>
+</div>

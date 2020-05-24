@@ -1,39 +1,69 @@
-<h2>パートナー紐づけ</h2>
-<br>
-<p><%= notice %></p>
-<%= link_to 'トップ画面に移動', users_path(current_user.id) %>
-<br><br>
+<div class="container">
+  <div class="col-xs-1"></div>
+  <div class="col-xs-10">
+    <nav class = "navbar navbar-default">
+      <div class = "container-fluid">
+        <div class = "navbar-header">
+          <button type = "button" class="navbar-toggle collapsed" data-toggle="collapse" data-target ="#gnavi">
+            <span class = "sr-only">Couple Happiness</span>
+            <span class = "icon-bar"></span>
+            <span class = "icon-bar"></span>
+            <span class = "icon-bar"></span>
+          </button>
+          <a class = "navbar-brand">Couple Happness</a>
+        </div>
+        <div id="gnavi" class="collapse navbar-collapse">
+          <ul class = "nav navbar-nav">
+            <li><%= link_to 'トップ画面', users_path(current_user.id) %></li>
+            <li><%= link_to 'ライフプラン', plans_path %></li>
+            <li><%= link_to '家訓', promises_path %></li>
+            <li><%= link_to '議事録', meetings_path %></li>
+            <li><%= link_to 'プロに相談', professionals_path %></li>
+            <li><%= link_to 'ユーザー編集', edit_user_path(current_user.id) %></li>
+            <li class = "nav navbar-right"><%= link_to "ログアウト", session_path(current_user.id), method: :delete %></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-<%= form_with url: search_users_path, method: :get, local: true do |f| %>
-  <%= f.label :名字 %>
-  <%= f.text_field :last_name %><br>
-  <%= f.label :名前 %>
-  <%= f.text_field :first_name %>
-  <br>
-  <%= f.submit :検索 %>
-<% end %>
-<br>
+    <h2 class="title2">パートナー紐づけ</h2>
+    <br>
+    <p><%= notice %></p>
+    <br>
 
-<% if  @users.present? %>
-  <%  @users.each do |user| %>
-    <%= user.last_name %>
-    <%= user.first_name %>
-    <%= image_tag(user.image.url, :size =>'100x100') if user.image && user.image.url %>
-
-    <% if ! (user.id == current_user.id) %>
-      <%= form_with model: UserMatch.new, local: true do |f| %>
-        <%= f.hidden_field :party_id, value: current_user.id %>
-        <%= f.hidden_field :partner_id, value: user.id %>
-        <%= f.hidden_field :confirmation_status, value: 1 %>   
-        <%= f.submit :申請する %>
-      <% end %>
+    <%= form_with url: search_users_path, method: :get, local: true do |f| %>
+      <%= f.label :名字 %>
+      <%= f.text_field :last_name %><br>
+      <%= f.label :名前 %>
+      <%= f.text_field :first_name %>
+      <br>
+      <%= f.submit :検索 %>
     <% end %>
     <br>
-  <% end %>
-  <% else %>
-<% end %>
-<br><br>
 
-<fotter>
-  <div class="company">© Couple Happiness Corp. All RIGHTS RESERVED.</div>
-</fotter>
+    <% if  @users.present? %>
+      <%  @users.each do |user| %>
+        <%= user.last_name %>
+        <%= user.first_name %>
+        <%= image_tag(user.image.url, :size =>'100x100') if user.image && user.image.url %>
+
+        <% if ! (user.id == current_user.id) %>
+          <%= form_with model: UserMatch.new, local: true do |f| %>
+            <%= f.hidden_field :party_id, value: current_user.id %>
+            <%= f.hidden_field :partner_id, value: user.id %>
+            <%= f.hidden_field :confirmation_status, value: 1 %>   
+            <%= f.submit :申請する %>
+          <% end %>
+        <% end %>
+        <br>
+      <% end %>
+    <% else %>
+    <% end %>
+    <br><br>
+
+    <footer>
+      <div class="company">© Couple Happiness Corp. All RIGHTS RESERVED.</div>
+    </footer>
+  </div>
+  <div class="col-xs-1"></div>
+</div>

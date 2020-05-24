@@ -1,51 +1,76 @@
-<h2>ライフプラン一覧</h2>
-<br>
-<%= link_to 'トップ画面に移動する', users_path(@current_user.id) %><br>
-<br><br>
-<%= link_to 'ライフプランを登録する', new_plan_path %>
-<br><br>
+<div class="container">
+  <div class="col-xs-1"></div>
+  <div class="col-xs-10">
 
+    <nav class = "navbar navbar-default">
+      <div class = "container-fluid">
+        <div class = "navbar-header">
+          <button type = "button" class="navbar-toggle collapsed" data-toggle="collapse" data-target ="#gnavi">
+            <span class = "sr-only">Couple Happiness</span>
+            <span class = "icon-bar"></span>
+            <span class = "icon-bar"></span>
+            <span class = "icon-bar"></span>
+          </button>
+          <a class = "navbar-brand">Couple Happness</a>
+        </div>
+        <div id="gnavi" class="collapse navbar-collapse">
+          <ul class = "nav navbar-nav">
+            <li><%= link_to 'トップ画面', users_path(current_user.id) %></li>
+            <li><%= link_to '家訓', promises_path %></li>
+            <li><%= link_to '議事録', meetings_path %></li>
+            <li><%= link_to 'プロに相談', professionals_path %></li>
+            <li><%= link_to 'ユーザー編集', edit_user_path(current_user.id) %></li>
+            <li class = "nav navbar-right"><%= link_to "ログアウト", session_path(current_user.id), method: :delete %></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-<%= current_user.last_name %> <%= current_user.first_name %>のプラン
+    <h2 class="title2">ライフプラン一覧</h2>
+    <br>
+    <button type="button" class="btn btn-info rounded-pill btn-lg"><%= link_to 'ライフプランを登録する', new_plan_path %></button>
+    <br><br>
 
-<table>
-<th>目標日</th>
-<th>詳細</th>
-<th>編集</th>
-<th>削除</th>
-
-<% @current_user.plans.reverse_each do |plan| %>
-  <tr>
-    <td><%= plan.plan_set %></td>
-    <td><%= plan.detail %></td>
-    <td><%= link_to '編集', edit_plan_path(plan.id) %></td>
-    <td><%= link_to '削除', plan_path(plan.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } %></td>
-  </tr>
-<% end %>
-</table>
-<br><br>
-
-<% if (UserMatch.all.find_by(partner_id: current_user.id)).present?  %>
-  <% if (UserMatch.all.find_by(party_id: current_user.id)).present?  %>
-    
-    <% @user = User.all.find(UserMatch.all.find_by(party_id: current_user.id).partner_id) %>
-    <%= @user.last_name %> <%= @user.first_name %>のプラン
+    <h3 class="title3"><%= current_user.last_name %> <%= current_user.first_name %>のプラン</h3>
 
     <table>
-    <th>目標日</th>
-    <th>詳細</th>
+      <th>目標日</th>
+      <th>詳細</th>
+      <th>編集</th>
+      <th>削除</th>
 
-    <% @user.plans.reverse_each do |plan| %>
-      <tr>
-      <td><%= plan.plan_set %></td>
-      <td><%= plan.detail %></td>
-      </tr>
-    <% end %>
+      <% @current_user.plans.reverse_each do |plan| %>
+        <tr>
+          <td><%= plan.plan_set %></td>
+          <td><%= plan.detail %></td>
+          <td><%= link_to '編集', edit_plan_path(plan.id) %></td>
+          <td><%= link_to '削除', plan_path(plan.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } %></td>
+        </tr>
+      <% end %>
     </table>
-  <% end %>
-<% end %>
-<br><br>
+    <br><br>
 
-<fotter>
-  <div class="company">© Couple Happiness Corp. All RIGHTS RESERVED.</div>
-</fotter>
+    <% if (UserMatch.all.find_by(partner_id: current_user.id)).present?  %>
+      <% if (UserMatch.all.find_by(party_id: current_user.id)).present?  %>
+        <% @user = User.all.find(UserMatch.all.find_by(party_id: current_user.id).partner_id) %>
+        <h3 class="title3"><%= @user.last_name %> <%= @user.first_name %>のプラン</h3>
+        <table>
+          <th>目標日</th>
+          <th>詳細</th>
+          <% @user.plans.reverse_each do |plan| %>
+            <tr>
+              <td><%= plan.plan_set %></td>
+              <td><%= plan.detail %></td>
+            </tr>
+          <% end %>
+        </table>
+      <% end %>
+    <% end %>
+    <br><br>
+
+    <footer>
+        <div class="company">© Couple Happiness Corp. All RIGHTS RESERVED.</div>
+    </footer>
+  </div>
+  <div class="col-xs-1"></div>
+</div>

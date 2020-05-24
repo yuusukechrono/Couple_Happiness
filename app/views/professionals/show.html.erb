@@ -1,25 +1,50 @@
-<%= link_to "ログアウト", destroy_professional_sessions_path(current_professional.id) %>  <br><br>
-<%= link_to 'プロフェッショナル情報編集', edit_professional_path(current_professional.id) %><br><br>
+<div class="container">
+  <div class="col-xs-1"></div>
+  <div class="col-xs-10">
+    <nav class = "navbar navbar-default">
+      <div class = "container-fluid">
+        <div class = "navbar-header">
+          <button type = "button" class="navbar-toggle collapsed" data-toggle="collapse" data-target ="#gnavi">
+            <span class = "sr-only">Couple Happiness</span>
+            <span class = "icon-bar"></span>
+            <span class = "icon-bar"></span>
+            <span class = "icon-bar"></span>
+          </button>
+          <a class = "navbar-brand">Couple Happness</a>
+        </div>
+        <div id="gnavi" class="collapse navbar-collapse">
+          <ul class = "nav navbar-nav">
+            <li><%= link_to '相談部屋', consultation_rooms_path %></li>
+            <li><%= link_to 'プロ情報編集', edit_professional_path(current_professional.id) %></li>
+            <li><%= link_to "ログアウト", destroy_professional_sessions_path(current_professional.id) %> </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-<table>
-  <tr>
-  <th></th>
-  <th>名前</th>
-  <th>サービス名</th>
-  <th>詳細</th>
-  </tr>
+    <h2 class="title2">プロページ</h2>
+    <br><br>
 
-<tr>
-<td><%= image_tag(current_professional.professional_image.url, size:'80x80')  if current_professional.professional_image.present?%></td>
-<td><%= current_professional.last_name %> <%= current_professional.first_name %></td>
-<td><%= current_professional.service_name %></td>
-<td><%= current_professional.self_introduction %></td>
-</tr>
-</table>
-<br><br>
+    <table>
+      <tr>
+        <th></th>
+        <th>名前</th>
+        <th>サービス名</th>
+        <th>詳細</th>
+      </tr>
 
-<%= link_to '相談部屋', consultation_rooms_path %><br><br>
+      <tr>
+        <td><%= image_tag(current_professional.professional_image.url, size:'80x80')  if current_professional.professional_image.present?%></td>
+        <td><%= current_professional.last_name %> <%= current_professional.first_name %></td>
+        <td><%= current_professional.service_name %></td>
+        <td><%= current_professional.self_introduction %></td>
+      </tr>
+    </table>
+    <br><br>
 
-<fotter>
-  <div class="company">© Couple Happiness Corp. All RIGHTS RESERVED.</div>
-</fotter>
+    <footer>
+      <div class="company">© Couple Happiness Corp. All RIGHTS RESERVED.</div>
+    </footer>
+  </div>
+  <div class="col-xs-1"></div>
+</div>

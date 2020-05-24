@@ -1,92 +1,115 @@
-<h2>質問と回答一覧</h2>
-<br>
-<%= link_to 'トップ画面に移動する', users_path(@current_user.id) %>
-<br><br>
-<%= link_to '質問に答える', answer_to_question_answers_path(:category_for_answer => @category) %>
-<br><br><br>
+<div class="container">
+  <div class="col-xs-1"></div>
+  <div class="col-xs-10">
+    <nav class = "navbar navbar-default">
+      <div class = "container-fluid">
+        <div class = "navbar-header">
+          <button type = "button" class="navbar-toggle collapsed" data-toggle="collapse" data-target ="#gnavi">
+            <span class = "sr-only">Couple Happiness</span>
+            <span class = "icon-bar"></span>
+            <span class = "icon-bar"></span>
+            <span class = "icon-bar"></span>
+          </button>
+          <a class = "navbar-brand">Couple Happness</a>
+        </div>
+        <div id="gnavi" class="collapse navbar-collapse">
+          <ul class = "nav navbar-nav">
+            <li><%= link_to 'トップ画面', users_path(@current_user.id) %></li>
+            <li><%= link_to 'ライフプラン', plans_path %></li>
+            <li><%= link_to '家訓', promises_path %></li>
+            <li><%= link_to '議事録', meetings_path %></li>
+            <li><%= link_to 'プロに相談', professionals_path %></li>
+            <li><%= link_to 'ユーザー編集', edit_user_path(current_user.id) %></li>
+            <li class = "nav navbar-right"><%= link_to "ログアウト", session_path(current_user.id), method: :delete %></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-<%= @category %>
-<%= Category.all.find(@category).detail %>
-<br><br>
+    <h2 class="title2">質問と回答一覧</h2>
+    <br>
+    <button type="button" class="btn btn-info rounded-pill btn-lg">
+    <%= link_to '質問に答える', answer_to_question_answers_path(:category_for_answer => @category) %></button>
+    <br><br>
 
-<%= current_user.last_name %> <%= current_user.first_name %>の回答状況
-<br><br>
+    <h2><%= @category %>.<%= Category.all.find(@category).detail %></h2>
+    <br>
+    <h3 class="title3"><%= current_user.last_name %> <%= current_user.first_name %>の回答</h3>
+    <br>
 
-<% @questions = Question.where(category_id: @category) %>
-<% j = 1 %>
-
-<table border = "1">
-<th>質問</th>
-<th>回答</th>
-<th>詳細</th>
-
-<% @questions.each do |question| %>
-  <tr>
-  <td>Q.<%= j %><%= question.detail %></td>
-  <% @answer = Answer.find_by("(question_id = ?) and (user_id = ?)" , question.id, current_user.id) %>
-
-  <% if @answer.present? %>
-    <% if @answer.answer == "1" %>
-      <td><%= question.answer_left %></td>
-      <td><%= @answer.answer_detail %></td>
-    <% elsif @answer.answer == "2" %>
-      <td><%= question.answer_right %></td>
-      <td><%= @answer.answer_detail %></td>
-    <% else %>
-      <td>"未回答"</td>
-      <td></td>
-    <% end %>
-  <% else %>
-    <td>"未回答"</td>
-    <td></td>
-  <% end %>
-  </tr>
-  <% j += 1 %>
-<% end %> 
-</table>
-<br><br>
-
-<% if (UserMatch.all.find_by(partner_id: current_user.id)).present?  %>
-  <% if (UserMatch.all.find_by(party_id: current_user.id)).present?  %>
-    <% @user = User.all.find(UserMatch.all.find_by(party_id: current_user.id).partner_id) %>
-    <%= @user.last_name %> <%= @user.first_name %>の回答状況
+    <% @questions = Question.where(category_id: @category) %>
     <% j = 1 %>
-    <table border = "1">
-    <th>質問</th>
-    <th>回答</th>
-    <th>詳細</th>
 
-    <% @questions.each do |question| %>
-      <tr>
-      <td>Q.<%= j %><%= question.detail %></td>
+    <table class="table_a">
+      <th>質問</th>
+      <th>回答</th>
+      <th>詳細</th>
 
-      <% @answer = Answer.find_by("(question_id = ?) and (user_id = ?)" , question.id, @user.id) %>
-      
-      <% if @answer.present? %>
-        <% if @answer.answer == "1" %>
-          <td><%= question.answer_left %></td>
-          <td><%= @answer.answer_detail %></td>
-        <% elsif @answer.answer == "2" %>
-          <td><%= question.answer_right %></td>
-          <td><%= @answer.answer_detail %></td>
-        <% else %>
-          <td>"未回答"</td>
-          <td></td>
+      <% @questions.each do |question| %>
+        <tr>
+          <td>Q.<%= j %><%= question.detail %></td>
+          <% @answer = Answer.find_by("(question_id = ?) and (user_id = ?)" , question.id, current_user.id) %>
+
+          <% if @answer.present? %>
+            <% if @answer.answer == "1" %>
+              <td><%= question.answer_left %></td>
+              <td><%= @answer.answer_detail %></td>
+            <% elsif @answer.answer == "2" %>
+              <td><%= question.answer_right %></td>
+              <td><%= @answer.answer_detail %></td>
+            <% else %>
+              <td>"未回答"</td>
+              <td></td>
+            <% end %>
+          <% else %>
+            <td>"未回答"</td>
+            <td></td>
           <% end %>
-      <% else %>
-        <td>"未回答"</td>
-        <td></td>
+        </tr>
+        <% j += 1 %>
+      <% end %> 
+    </table>
+    <br><br>
+
+    <% if (UserMatch.all.find_by(partner_id: current_user.id)).present?  %>
+      <% if (UserMatch.all.find_by(party_id: current_user.id)).present?  %>
+        <% @user = User.all.find(UserMatch.all.find_by(party_id: current_user.id).partner_id) %>
+        <h3 class="title3"><%= @user.last_name %> <%= @user.first_name %>の回答</h3><br>
+        <% j = 1 %>
+        <table class="table_a">
+          <th>質問</th>
+          <th>回答</th>
+          <th>詳細</th>
+          <% @questions.each do |question| %>
+            <tr>
+              <td>Q.<%= j %><%= question.detail %></td>
+              <% @answer = Answer.find_by("(question_id = ?) and (user_id = ?)" , question.id, @user.id) %>
+              <% if @answer.present? %>
+                <% if @answer.answer == "1" %>
+                  <td><%= question.answer_left %></td>
+                  <td><%= @answer.answer_detail %></td>
+                <% elsif @answer.answer == "2" %>
+                  <td><%= question.answer_right %></td>
+                  <td><%= @answer.answer_detail %></td>
+                <% else %>
+                  <td>"未回答"</td>
+                  <td></td>
+                <% end %>
+              <% else %>
+                <td>"未回答"</td>
+                <td></td>
+              <% end %>
+              <% j += 1 %>
+            </tr> 
+          <% end %>
+        </table> 
       <% end %>
-
-      <% j += 1 %>
-      </tr> 
     <% end %>
-    
-    </table> 
-  <% end %>
-<% end %>
-<br><br>
+    <br><br>
 
-<fotter>
-  <div class="company">© Couple Happiness Corp. All RIGHTS RESERVED.</div>
-</fotter>
+    <footer>
+      <div class="company">© Couple Happiness Corp. All RIGHTS RESERVED.</div>
+    </footer>
+  </div>
+  <div class="col-xs-1"></div>
+</div>

@@ -1,44 +1,72 @@
-<h2>議事録一覧</h2>
-<br>
-<%= link_to 'トップ画面に移動する', users_path(@current_user.id) %><br>
-<br><br>
-<%= link_to '議事録を作成する', new_meeting_path %>
-<br><br>
+<div class="container">
+  <div class="col-xs-1"></div>
+  <div class="col-xs-10">
+    <nav class = "navbar navbar-default">
+      <div class = "container-fluid">
+        <div class = "navbar-header">
+          <button type = "button" class="navbar-toggle collapsed" data-toggle="collapse" data-target ="#gnavi">
+            <span class = "sr-only">Couple Happiness</span>
+            <span class = "icon-bar"></span>
+            <span class = "icon-bar"></span>
+            <span class = "icon-bar"></span>
+          </button>
+          <a class = "navbar-brand">Couple Happness</a>
+        </div>
+        <div id="gnavi" class="collapse navbar-collapse">
+          <ul class = "nav navbar-nav">
+            <li><%= link_to 'トップ画面', users_path(@current_user.id) %></li>
+            <li><%= link_to 'ライフプラン', plans_path %></li>
+            <li><%= link_to '家訓', promises_path %></li>
+            <li><%= link_to 'プロに相談', professionals_path %></li>
+            <li><%= link_to 'ユーザー編集', edit_user_path(current_user.id) %></li>
+            <li class = "nav navbar-right"><%= link_to "ログアウト", session_path(current_user.id), method: :delete %></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-<table>
-<th>カテゴリー</th>
-<th>議題</th>
-<th>閲覧</th>
-<th>編集</th>
-<th>削除</th>
+    <h2 class="title2">議事録一覧</h2>
+    <br>
+    <button type="button" class="btn btn-info rounded-pill btn-lg"><%= link_to '議事録を作成する', new_meeting_path %></button>
+    <br><br>
 
-<% @current_user.meetings.reverse_each do |meeting| %>
-  <tr>
-    <td><%= meeting.category.detail %></td>
-    <td><%= meeting.subject %></td>
-    <td><%= link_to '閲覧', meeting_path(meeting.id) %></td>
-    <td><%= link_to '編集', edit_meeting_path(meeting.id) %></td>
-    <td><%= link_to '削除', meeting_path(meeting.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } %></td>
-  </tr>
-<% end %>
+    <table>
+      <th>カテゴリー</th>
+      <th>議題</th>
+      <th>閲覧</th>
+      <th>編集</th>
+      <th>削除</th>
 
-<% if (UserMatch.all.find_by(partner_id: current_user.id)).present?  %>
-  <% if (UserMatch.all.find_by(party_id: current_user.id)).present?  %>
-    <% @user = User.all.find(UserMatch.all.find_by(party_id: current_user.id).partner_id) %>
-    <% @user.meetings.reverse_each do |meeting| %>
+    <% @current_user.meetings.reverse_each do |meeting| %>
       <tr>
-      <td><%= meeting.category.detail %></td>
-      <td><%= meeting.subject %></td>
-      <td><%= link_to '閲覧', meeting_path(meeting.id) %></td>
-      <td><%= link_to '編集', edit_meeting_path(meeting.id) %></td>
-      <td><%= link_to '削除', meeting_path(meeting.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } %></td>
+        <td><%= meeting.category.detail %></td>
+        <td><%= meeting.subject %></td>
+        <td><%= link_to '閲覧', meeting_path(meeting.id) %></td>
+        <td><%= link_to '編集', edit_meeting_path(meeting.id) %></td>
+        <td><%= link_to '削除', meeting_path(meeting.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } %></td>
       </tr>
     <% end %>
-  <% end %>
-<% end %>
-</table>
-<br><br>
 
-<fotter>
-  <div class="company">© Couple Happiness Corp. All RIGHTS RESERVED.</div>
-</fotter>
+    <% if (UserMatch.all.find_by(partner_id: current_user.id)).present?  %>
+      <% if (UserMatch.all.find_by(party_id: current_user.id)).present?  %>
+        <% @user = User.all.find(UserMatch.all.find_by(party_id: current_user.id).partner_id) %>
+        <% @user.meetings.reverse_each do |meeting| %>
+          <tr>
+            <td><%= meeting.category.detail %></td>
+            <td><%= meeting.subject %></td>
+            <td><%= link_to '閲覧', meeting_path(meeting.id) %></td>
+            <td><%= link_to '編集', edit_meeting_path(meeting.id) %></td>
+            <td><%= link_to '削除', meeting_path(meeting.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    <% end %>
+    </table>
+    <br><br>
+
+    <footer>
+      <div class="company">© Couple Happiness Corp. All RIGHTS RESERVED.</div>
+    </footer>
+  </div>
+  <div class="col-xs-1"></div>
+</div>

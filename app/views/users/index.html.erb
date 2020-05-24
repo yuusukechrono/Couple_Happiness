@@ -1,83 +1,105 @@
-<h2>ユーザーページ</h2>
-<%= link_to "ログアウト", session_path(current_user.id), method: :delete %>
-<br><br>
-<%= link_to 'ユーザー編集', edit_user_path(current_user.id) %>
-<br><br>
+<div class="container">
+  <div class="col-xs-1"></div>
+  <div class="col-xs-10">
 
-<table border="1">
-<tr>
-<td>自分</td>
-<td><%= image_tag(current_user.image.url, size:'80x80')  if current_user.image.present?%></td>
-<td><%= current_user.last_name %> <%= current_user.first_name %></td>
-</tr>
+    <nav class = "navbar navbar-default">
+      <div class = "container-fluid">
+        <div class = "navbar-header">
+          <button type = "button" class="navbar-toggle collapsed" data-toggle="collapse" data-target ="#gnavi">
+            <span class = "sr-only">Couple Happiness</span>
+            <span class = "icon-bar"></span>
+            <span class = "icon-bar"></span>
+            <span class = "icon-bar"></span>
+          </button>
+          <a class = "navbar-brand">Couple Happness</a>
+        </div>
+        <div id="gnavi" class="collapse navbar-collapse">
+          <ul class = "nav navbar-nav">
+            <li><%= link_to 'ライフプラン', plans_path %></li>
+            <li><%= link_to '家訓', promises_path %></li>
+            <li><%= link_to '議事録', meetings_path %></li>
+            <li><%= link_to 'プロに相談', professionals_path %></li>
+            <li><%= link_to 'ユーザー編集', edit_user_path(current_user.id) %></li>
+            <li class = "nav navbar-right"><%= link_to "ログアウト", session_path(current_user.id), method: :delete %></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-<% if (UserMatch.all.find_by(partner_id: current_user.id)).present?  %>
-  <% if (UserMatch.all.find_by(party_id: current_user.id)).present?  %>
-    <td>パートナー</td>
-    <td><%= image_tag(User.all.find_by(id: UserMatch.all.find_by(party_id: current_user.id).partner_id).image.url, size:'80x80') if User.all.find_by(id: UserMatch.all.find_by(party_id: current_user.id).partner_id).image.url.present?%></td>
+    <h2 class="title2">ユーザーページ</h2>
+    <br><br>
+   
+    <table>
+      <tr>
+        <td>自分</td>
+        <td><%= image_tag(current_user.image.url, size:'80x80')  if current_user.image.present?%></td>
+        <td><%= current_user.last_name %> <%= current_user.first_name %></td>
+      </tr>
 
-    <td><%= User.all.find_by(id: UserMatch.all.find_by(party_id: current_user.id).partner_id).last_name %><%= User.all.find_by(id: UserMatch.all.find_by(party_id: current_user.id).partner_id).first_name %></td>
-  <% end %>
-<% end %>
-</table>
-<br>
+      <% if (UserMatch.all.find_by(partner_id: current_user.id)).present?  %>
+        <% if (UserMatch.all.find_by(party_id: current_user.id)).present?  %>
+          <td>パートナー</td>
+          <td><%= image_tag(User.all.find_by(id: UserMatch.all.find_by(party_id: current_user.id).partner_id).image.url, size:'80x80') if User.all.find_by(id: UserMatch.all.find_by(party_id: current_user.id).partner_id).image.url.present?%></td>
 
-<% if (UserMatch.all.find_by(party_id: current_user.id)).present? %>
-<%#= 申請済みなら表示しない %>
-<% else %>
-  <%= link_to 'パートナー検索', search_users_path %>
-  <br><br>
-<% end %>
+          <td><%= User.all.find_by(id: UserMatch.all.find_by(party_id: current_user.id).partner_id).last_name %><%= User.all.find_by(id: UserMatch.all.find_by(party_id: current_user.id).partner_id).first_name %></td>
+        <% end %>
+      <% end %>
+    </table>
+    <br>
 
-<% if (UserMatch.all.find_by(partner_id: current_user.id)).present? %>
-  <% if (UserMatch.all.find_by(party_id: current_user.id)).present? %>
-  <%#= 相手が申請し、自分も申請している%>
-  <% else %>
-  <%#= 相手が申請し、自分は申請していない%>
-    <%= form_with model: UserMatch.new, local: true do |f| %>
-      <%= f.hidden_field :party_id, value: current_user.id %>
-      <%= f.hidden_field :partner_id, value: UserMatch.all.find_by(partner_id: current_user.id).party_id %>
-      <%= f.hidden_field :confirmation_status, value: 1 %>   
-      <%= 'パートナーから申請が来ています！'%>
-      <%= f.submit :承認する %>
+    <% if (UserMatch.all.find_by(party_id: current_user.id)).present? %>
+      <%#= 申請済みなら表示しない %>
+    <% else %>
+      <%= link_to 'パートナー検索', search_users_path %>
       <br><br>
     <% end %>
-  <% end %>
-<% end %>
 
-<%= link_to 'ライフプラン', plans_path %>
-<br><br>
+    <% if (UserMatch.all.find_by(partner_id: current_user.id)).present? %>
+      <% if (UserMatch.all.find_by(party_id: current_user.id)).present? %>
+        <%#= 相手が申請し、自分も申請している%>
+      <% else %>
+        <%#= 相手が申請し、自分は申請していない%>
+        <%= form_with model: UserMatch.new, local: true do |f| %>
+          <%= f.hidden_field :party_id, value: current_user.id %>
+          <%= f.hidden_field :partner_id, value: UserMatch.all.find_by(partner_id: current_user.id).party_id %>
+          <%= f.hidden_field :confirmation_status, value: 1 %>   
+          <%= 'パートナーから申請が来ています！'%>
+          <%= f.submit :承認する %>
+          <br><br>
+        <% end %>
+      <% end %>
+    <% end %>
 
-<%= link_to '家訓', promises_path %>
-<br><br>
+    <h3 class="title3">質問カテゴリー</h3>
+    <br>
+    <div style="width: 600px">
+    <table class = "table_q">
+      <tr><td><%= link_to '1.結婚', answers_path(:category => 1) %></td>
+      <td><%= link_to '2.趣味', answers_path(:category => 2) %></td>
+      <td><%= link_to '3.食事', answers_path(:category => 3) %></td>
+      <td><%= link_to '4.イベント', answers_path(:category => 4) %></td></tr>
 
-<%= link_to '議事録', meetings_path %>
-<br><br>
+      <tr><td><%= link_to '5.仕事', answers_path(:category => 5) %></td>
+      <td><%= link_to '6.住居', answers_path(:category => 6) %></td>
+      <td><%= link_to '7.家事', answers_path(:category => 7) %></td>
+      <td><%= link_to '8.服', answers_path(:category => 8) %></td></tr>
+      
+      <tr><td><%= link_to '9.お金', answers_path(:category => 9) %></td>
+      <td><%= link_to '10.子育て', answers_path(:category => 10) %></td>
+      <td><%= link_to '11.家族', answers_path(:category => 11) %></td>
+      <td><%= link_to '12.介護', answers_path(:category => 12) %></td></tr>
 
-質問カテゴリー<br>
-<table>
-<tr><td><%= link_to '1.結婚', answers_path(:category => 1) %></td></tr>
-<tr><td><%= link_to '2.趣味', answers_path(:category => 2) %></td></tr>
-<tr><td><%= link_to '3.食事', answers_path(:category => 3) %></td></tr>
-<tr><td><%= link_to '4.イベント', answers_path(:category => 4) %></td></tr>
-<tr><td><%= link_to '5.仕事', answers_path(:category => 5) %></td></tr>
-<tr><td><%= link_to '6.住居', answers_path(:category => 6) %></td></tr>
-<tr><td><%= link_to '7.家事', answers_path(:category => 7) %></td></tr>
-<tr><td><%= link_to '8.服', answers_path(:category => 8) %></td></tr>
-<tr><td><%= link_to '9.お金', answers_path(:category => 9) %></td></tr>
-<tr><td><%= link_to '10.子育て', answers_path(:category => 10) %></td></tr>
-<tr><td><%= link_to '11.家族', answers_path(:category => 11) %></td></tr>
-<tr><td><%= link_to '12.介護', answers_path(:category => 12) %></td></tr>
-<tr><td><%= link_to '13.友人', answers_path(:category => 13) %></td></tr>
-<tr><td><%= link_to '14.美容', answers_path(:category => 14) %></td></tr>
-<tr><td><%= link_to '15.健康', answers_path(:category => 15) %></td></tr>
-<tr><td><%= link_to '16.性生活', answers_path(:category => 16) %></td></tr>
-</table>
-<br><br>
+      <tr><td><%= link_to '13.友人', answers_path(:category => 13) %></td>
+      <td><%= link_to '14.美容', answers_path(:category => 14) %></td>
+      <td><%= link_to '15.健康', answers_path(:category => 15) %></td>
+      <td><%= link_to '16.性生活', answers_path(:category => 16) %></td></tr>
+    </table>
+    </div>
+    <br><br>
 
-<%= link_to 'プロフェッショナルに相談', professionals_path %>
-<br><br>
-
-<fotter>
-  <div class="company">© Couple Happiness Corp. All RIGHTS RESERVED.</div>
-</fotter>
+    <footer>
+      <div class="company">© Couple Happiness Corp. All RIGHTS RESERVED.</div>
+    </footer>
+  </div>
+  <div class="col-xs-1"></div>
+</div>

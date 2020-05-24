@@ -1,29 +1,60 @@
-<h2>ライフプラン登録</h2>
-<br><br>
-<%= link_to 'ライフプラン一覧', plans_path %>
-<br><br>
+<div class="container">
+  <div class="col-xs-1"></div>
+  <div class="col-xs-10">
+    <nav class = "navbar navbar-default">
+      <div class = "container-fluid">
+        <div class = "navbar-header">
+          <button type = "button" class="navbar-toggle collapsed" data-toggle="collapse" data-target ="#gnavi">
+            <span class = "sr-only">Couple Happiness</span>
+            <span class = "icon-bar"></span>
+            <span class = "icon-bar"></span>
+            <span class = "icon-bar"></span>
+          </button>
+          <a class = "navbar-brand">Couple Happness</a>
+        </div>
+        <div id="gnavi" class="collapse navbar-collapse">
+          <ul class = "nav navbar-nav">
+            <li><%= link_to 'トップ画面', users_path(current_user.id) %></li>
+            <li><%= link_to '家訓', promises_path %></li>
+            <li><%= link_to '議事録', meetings_path %></li>
+            <li><%= link_to 'プロに相談', professionals_path %></li>
+            <li><%= link_to 'ユーザー編集', edit_user_path(current_user.id) %></li>
+            <li class = "nav navbar-right"><%= link_to "ログアウト", session_path(current_user.id), method: :delete %></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  
+    <h2 class="title2">ライフプラン登録</h2>
+    <br><br>
+    <button type="button" class="btn btn-info rounded-pill btn-lg"><%= link_to 'ライフプラン一覧', plans_path %></button>
+    <br><br>
 
-<%= form_with(model: @plan, local: true) do |plan| %>
-  <% if @plan.errors.any? %>
-    <div id="error_explanation">
-      <p><%= @plan.errors.count %>件のエラーがあります。</p>
-      <ul>
-      <% @plan.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
+    <div class ="base_a">
+    <%= form_with(model: @plan, local: true) do |plan| %>
+      <% if @plan.errors.any? %>
+        <div id="error_explanation">
+          <p><%= @plan.errors.count %>件のエラーがあります。</p>
+          <ul>
+            <% @plan.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
+
+      <%= plan.label :年月日 %><br>
+      <%= plan.date_field  :plan_date %><br>
+      <%= plan.label :詳細 %><br>
+      <%= plan.text_area :detail %><br>
+      <br><br>
+      <%= plan.submit '登録する' %><br><br>
+    <% end %>
     </div>
-  <% end %>
-
-  <%= plan.label :年月日 %><br>
-  <%= plan.date_field  :plan_date %><br>
-
-  <%= plan.label :詳細 %><br>
-  <%= plan.text_area :detail %><br>
-
-  <br><br>
-  <%= plan.submit '登録する' %><br><br>
-
-<% end %>
-
-
+    
+    <footer>
+      <div class="company">© Couple Happiness Corp. All RIGHTS RESERVED.</div>
+    </footer>
+  </div>
+  <div class="col-xs-1"></div>
+</div>
