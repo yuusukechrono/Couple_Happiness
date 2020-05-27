@@ -19,7 +19,6 @@
             <li><%= link_to '家訓', promises_path %></li>
             <li><%= link_to '議事録', meetings_path %></li>
             <li><%= link_to 'プロに相談', professionals_path %></li>
-            <li><%= link_to 'ユーザー編集', edit_user_path(current_user.id) %></li>
             <li class = "nav navbar-right"><%= link_to "ログアウト", session_path(current_user.id), method: :delete %></li>
           </ul>
         </div>
@@ -63,16 +62,16 @@
       <br>
 
       <%= f.label :性別 %>
-      <%= f.radio_button :性別, :male %>
+      <%= f.radio_button :sex, :male %>
       <%= f.label :sex, "男性", {value: :male, style: "display: inline-block;"} %>
-      <%= f.radio_button :性別, :female %>
+      <%= f.radio_button :sex, :female %>
       <%= f.label :sex, "女性", {value: :female, style: "display: inline-block;"} %>
       <br>
 
       <%= f.label :独身・既婚 %>
-      <%= f.radio_button :material_status, :male %>
+      <%= f.radio_button :material_status, :unmarried %>
       <%= f.label :material_status, "独身", {value: :unmarried, style: "display: inline-block;"} %>
-      <%= f.radio_button :material_status, :female %>
+      <%= f.radio_button :material_status, :married %>
       <%= f.label :material_status, "既婚", {value: :married, style: "display: inline-block;"} %>
       <br>
 

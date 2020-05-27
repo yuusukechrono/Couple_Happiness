@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_18_154210) do
+ActiveRecord::Schema.define(version: 2020_05_27_163635) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -133,11 +133,11 @@ ActiveRecord::Schema.define(version: 2020_05_18_154210) do
     t.string "first_name", null: false
     t.string "sex"
     t.string "material_status"
-    t.integer "birthday"
     t.string "blood_type"
     t.text "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "birthday"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
