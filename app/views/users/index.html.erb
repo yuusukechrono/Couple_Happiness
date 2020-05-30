@@ -67,9 +67,9 @@
           <%= 'パートナーから申請が来ています！'%>
 
           <table>
-            <td><%= image_tag(User.all.find_by(id: UserMatch.all.find_by(partner_id: current_user.id).party_id).image.url, size:'80x80') if User.all.find_by(id: UserMatch.all.find_by(party_id: current_user.id).partner_id).image.url.present?%></td>
+            <td><%= image_tag(User.all.find_by(id: UserMatch.all.find_by(partner_id: current_user.id).party_id).image.url, size:'80x80') if User.all.find_by(id: UserMatch.all.find_by(partner_id: current_user.id).party_id).image.url.present?%></td>
 
-            <td><%= User.all.find_by(id: UserMatch.all.find_by(partner_id: current_user.id).party_id).last_name %><%= User.all.find_by(id: UserMatch.all.find_by(party_id: current_user.id).partner_id).first_name %></td>
+            <td><%= User.all.find_by(id: UserMatch.all.find_by(partner_id: current_user.id).party_id).last_name %><%= User.all.find_by(id: UserMatch.all.find_by(partner_id: current_user.id).party_id).first_name %></td>
           </table>
 
           <%= f.submit :承認する %>

@@ -37,9 +37,8 @@ class UsersController < ApplicationController
 
 
   def search
-    if params[:last_name].present? and params[:last_name].present?
-      @users = User.where("last_name LIKE ? or first_name LIKE ?
-      ", "%#{params[:last_name]}%", "%#{params[:first_name]}%")
+    if params[:last_name].present? and params[:first_name].present?
+      @users = User.where("last_name LIKE ?", "%#{params[:last_name]}%").where("first_name LIKE ?", "%#{params[:first_name]}%")
     else
       @users = nil
     end
