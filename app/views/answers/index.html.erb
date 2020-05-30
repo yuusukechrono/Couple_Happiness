@@ -34,16 +34,20 @@
 
     <h2><%= @category %>.<%= Category.all.find(@category).detail %></h2>
     <br>
-    <h3 class="title3"><%= current_user.last_name %> <%= current_user.first_name %>の回答</h3>
-    <br>
 
     <% @questions = Question.where(category_id: @category) %>
     <% j = 1 %>
 
     <table class="table_a">
       <th>質問</th>
-      <th>回答</th>
-      <th>詳細</th>
+      <th>自分の回答</th>
+      <th>自分の詳細</th>
+      <% if (UserMatch.all.find_by(partner_id: current_user.id)).present?  %>
+        <% if (UserMatch.all.find_by(party_id: current_user.id)).present?  %>  
+          <th>パートナーの回答</th>
+          <th>パートナーの詳細</th>
+        <% end %>
+      <% end %>
 
       <% @questions.each do |question| %>
         <tr>
@@ -65,32 +69,18 @@
             <td>"未回答"</td>
             <td></td>
           <% end %>
-        </tr>
-        <% j += 1 %>
-      <% end %> 
-    </table>
-    <br><br>
 
-    <% if (UserMatch.all.find_by(partner_id: current_user.id)).present?  %>
-      <% if (UserMatch.all.find_by(party_id: current_user.id)).present?  %>
-        <% @user = User.all.find(UserMatch.all.find_by(party_id: current_user.id).partner_id) %>
-        <h3 class="title3"><%= @user.last_name %> <%= @user.first_name %>の回答</h3><br>
-        <% j = 1 %>
-        <table class="table_a">
-          <th>質問</th>
-          <th>回答</th>
-          <th>詳細</th>
-          <% @questions.each do |question| %>
-            <tr>
-              <td>Q.<%= j %><%= question.detail %></td>
-              <% @answer = Answer.find_by("(question_id = ?) and (user_id = ?)" , question.id, @user.id) %>
-              <% if @answer.present? %>
-                <% if @answer.answer == "1" %>
+          <% if (UserMatch.all.find_by(partner_id: current_user.id)).present?  %>
+            <% if (UserMatch.all.find_by(party_id: current_user.id)).present?  %>  
+              <% @user2 = User.all.find(UserMatch.all.find_by(party_id: current_user.id).partner_id) %>
+              <% @answer2 = Answer.find_by("(question_id = ?) and (user_id = ?)" , question.id, @user2.id) %>
+                <% if @answer2.present? %>
+                <% if @answer2.answer == "1" %>
                   <td><%= question.answer_left %></td>
-                  <td><%= @answer.answer_detail %></td>
-                <% elsif @answer.answer == "2" %>
+                  <td><%= @answer2.answer_detail %></td>
+                <% elsif @answer2.answer == "2" %>
                   <td><%= question.answer_right %></td>
-                  <td><%= @answer.answer_detail %></td>
+                  <td><%= @answer2.answer_detail %></td>
                 <% else %>
                   <td>"未回答"</td>
                   <td></td>
@@ -99,12 +89,12 @@
                 <td>"未回答"</td>
                 <td></td>
               <% end %>
-              <% j += 1 %>
-            </tr> 
+            <% end %>
           <% end %>
-        </table> 
-      <% end %>
-    <% end %>
+        </tr>
+        <% j += 1 %>
+      <% end %> 
+    </table>
     <br><br>
 
     <footer>

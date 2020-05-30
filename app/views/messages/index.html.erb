@@ -54,7 +54,7 @@
                   <% else %>
                   <% end %>
                 </strong>
-                <%= message.created_at %>
+                <%= message.created_at.strftime('%Y/%m/%d %H:%M:%S') %>
               </div>
               <div class="list">
                 <div class="item">
