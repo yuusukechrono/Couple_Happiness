@@ -14,6 +14,7 @@
         </div>
         <div id="gnavi" class="collapse navbar-collapse">
           <ul class = "nav navbar-nav">
+            <li><%= link_to 'トップページ', professional_path(current_professional) %></li>
             <li><%= link_to '相談部屋', consultation_rooms_path %></li>
             <li><%= link_to 'プロ情報編集', edit_professional_path(current_professional.id) %></li>
             <li><%= link_to "ログアウト", destroy_professional_sessions_path(current_professional.id) %> </li>

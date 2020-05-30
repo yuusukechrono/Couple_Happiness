@@ -15,6 +15,7 @@
         </div>
         <div id="gnavi" class="collapse navbar-collapse">
           <ul class = "nav navbar-nav">
+            <li><%= link_to 'トップ画面', users_path(current_user.id) %></li>
             <li><%= link_to 'ライフプラン', plans_path %></li>
             <li><%= link_to '家訓', promises_path %></li>
             <li><%= link_to '議事録', meetings_path %></li>
@@ -64,6 +65,13 @@
           <%= f.hidden_field :partner_id, value: UserMatch.all.find_by(partner_id: current_user.id).party_id %>
           <%= f.hidden_field :confirmation_status, value: 1 %>   
           <%= 'パートナーから申請が来ています！'%>
+
+          <table>
+            <td><%= image_tag(User.all.find_by(id: UserMatch.all.find_by(partner_id: current_user.id).party_id).image.url, size:'80x80') if User.all.find_by(id: UserMatch.all.find_by(party_id: current_user.id).partner_id).image.url.present?%></td>
+
+            <td><%= User.all.find_by(id: UserMatch.all.find_by(partner_id: current_user.id).party_id).last_name %><%= User.all.find_by(id: UserMatch.all.find_by(party_id: current_user.id).partner_id).first_name %></td>
+          </table>
+
           <%= f.submit :承認する %>
           <br><br>
         <% end %>
