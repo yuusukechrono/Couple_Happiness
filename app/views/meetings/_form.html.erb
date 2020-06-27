@@ -1,64 +1,65 @@
 <div class="container">
-  <div class="col-xs-1"></div>
-  <div class="col-xs-10">
-    <nav class = "navbar navbar-default">
+  <div class="col-xs">
+    <nav class = "navbar navbar-default navbar-fixed-top">
       <div class = "container-fluid">
-      <div class = "navbar-header">
-        <button type = "button" class="navbar-toggle collapsed" data-toggle="collapse" data-target ="#gnavi">
-          <span class = "sr-only">Couple Happiness</span>
-          <span class = "icon-bar"></span>
-          <span class = "icon-bar"></span>
-          <span class = "icon-bar"></span>
-        </button>
-        <a class = "navbar-brand">Couple Happness</a>
-      </div>
-      <div id="gnavi" class="collapse navbar-collapse">
-        <ul class = "nav navbar-nav">
-          <li><%= link_to 'トップ画面', users_path(current_user.id) %></li>
-          <li><%= link_to 'ライフプラン', plans_path %></li>
-          <li><%= link_to '家訓', promises_path %></li>
-          <li><%= link_to '議事録', meetings_path %></li>
-          <li><%= link_to 'プロに相談', professionals_path %></li>
-          <li><%= link_to 'ユーザー編集', edit_user_path(current_user.id) %></li>
-          <li class = "nav navbar-right"><%= link_to "ログアウト", session_path(current_user.id), method: :delete %></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-    <h2 class="title2">議事録作成</h2>
-    <br>
-    <button type="button" class="btn btn-info rounded-pill btn-lg"><%= link_to '議事録一覧', meetings_path %></button>
-    <br><br>
-
-    <%= form_with(model: @meeting, local: true) do |meeting| %>
-      <% if @meeting.errors.any? %>
-        <div id="error_explanation">
-          <p><%= @meeting.errors.count %>件のエラーがあります。</p>
-          <ul>
-            <% @meeting.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-            <% end %>
+        <div class = "navbar-header">
+          <button type = "button" class="navbar-toggle collapsed" data-toggle="collapse" data-target ="#gnavi">
+            <span class = "sr-only">Couple Happiness</span>
+            <span class = "icon-bar"></span>
+            <span class = "icon-bar"></span>
+            <span class = "icon-bar"></span>
+          </button>
+          <a class = "navbar-brand">Couple Happness</a>
+        </div>
+        <div id="gnavi" class="collapse navbar-collapse">
+          <ul class = "nav navbar-nav">
+            <li><%= link_to 'トップ画面', users_path(current_user.id) %></li>
+            <li><%= link_to 'ライフプラン', plans_path %></li>
+            <li><%= link_to '家訓', promises_path %></li>
+            <li><%= link_to '議事録', meetings_path %></li>
+            <li><%= link_to 'プロに相談', professionals_path %></li>
+            <li><%= link_to 'ユーザー編集', edit_user_path(current_user.id) %></li>
+            <li class = "nav navbar-right"><%= link_to "ログアウト", session_path(current_user.id), method: :delete %></li>
           </ul>
         </div>
-      <% end %>
+      </div>
+    </nav>
 
-      <div class = "base_a">
-      <%= meeting.label :カテゴリー %><br>
-      <%= meeting.select :category_id, [["結婚", 1], ["趣味", 2], ["食事", 3], ["イベント", 4],  ["仕事", 5],  ["住居", 6],  ["家事", 7],  ["服", 8],  ["お金", 9],  ["子育て", 10],  ["家族", 11],  ["介護", 12],  ["友人", 13],  ["美容", 14],  ["健康", 15],  ["性生活", 16]], include_blank: "選択して下さい" %><br>
-      <%= meeting.label :議題 %><br>
-      <%= meeting.text_area :subject %><br>
-      <%= meeting.label :議事録 %><br>
-      <%= meeting.text_area :memo %><br>
+    <body>
+      <h2 class="title2">議事録作成</h2>
+      <br>
+      <button type="button" class="btn btn-info rounded-pill btn-lg"><%= link_to '議事録一覧', meetings_path %></button>
       <br><br>
-      <%= meeting.submit '登録する' %>
-    <% end %>
-    </div>
-    <br><br>
 
-    <footer>
-      <div class="company">© Couple Happiness Corp. All RIGHTS RESERVED.</div>
-    </footer>
+      <%= form_with(model: @meeting, local: true) do |meeting| %>
+        <% if @meeting.errors.any? %>
+          <div id="error_explanation">
+            <p><%= @meeting.errors.count %>件のエラーがあります。</p>
+            <ul>
+              <% @meeting.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class = "base_a">
+          <%= meeting.label :カテゴリー %><br>
+          <%= meeting.select :category_id, [["結婚", 1], ["趣味", 2], ["食事", 3], ["イベント", 4],  ["仕事", 5],  ["住居", 6],  ["家事", 7],  ["服", 8],  ["お金", 9],  ["子育て", 10],  ["家族", 11],  ["介護", 12],  ["友人", 13],  ["美容", 14],  ["健康", 15],  ["性生活", 16]], include_blank: "選択して下さい" %><br>
+          <%= meeting.label :議題 %><br>
+          <%= meeting.text_area :subject, :size=>"100x1" %><br>
+          <%= meeting.label :議事録 %><br>
+          <%= meeting.text_area :memo,:size=>"100x10" %><br>
+          <br><br>
+          <%= meeting.submit '登録する' %>
+        </div>
+      <% end %>
+    </body>
+
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+      <footer>
+        <div class="company">© Couple Happiness Corp. All RIGHTS RESERVED.</div>
+      </footer>
+    </nav>
   </div>
-  <div class="col-xs-1"></div>
 </div>

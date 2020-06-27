@@ -1,7 +1,6 @@
 <div class="container">
-  <div class="col-xs-1"></div>
-  <div class="col-xs-10">
-    <nav class = "navbar navbar-default">
+  <div class="col-xs">
+    <nav class = "navbar navbar-default navbar-fixed-top">
       <div class = "container-fluid">
         <div class = "navbar-header">
           <button type = "button" class="navbar-toggle collapsed" data-toggle="collapse" data-target ="#gnavi">
@@ -26,6 +25,7 @@
       </div>
     </nav>
   
+    <body>
     <h2 class="title2">ライフプラン登録</h2>
     <br><br>
     <button type="button" class="btn btn-info rounded-pill btn-lg"><%= link_to 'ライフプラン一覧', plans_path %></button>
@@ -47,15 +47,17 @@
       <%= plan.label :年月日 %><br>
       <%= plan.date_field  :plan_date %><br>
       <%= plan.label :詳細 %><br>
-      <%= plan.text_area :detail %><br>
+      <%= plan.text_area :detail, :size=>"80x1" %><br>
       <br><br>
       <%= plan.submit '登録する' %><br><br>
     <% end %>
     </div>
+    </body>
     
-    <footer>
-      <div class="company">© Couple Happiness Corp. All RIGHTS RESERVED.</div>
-    </footer>
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+      <footer>
+        <div class="company">© Couple Happiness Corp. All RIGHTS RESERVED.</div>
+      </footer>
+    </nav>
   </div>
-  <div class="col-xs-1"></div>
 </div>

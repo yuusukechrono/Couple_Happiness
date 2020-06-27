@@ -1,7 +1,6 @@
 <div class="container">
-  <div class="col-xs-1"></div>
-  <div class="col-xs-10">
-    <nav class = "navbar navbar-default">
+  <div class="col-xs">
+    <nav class = "navbar navbar-default navbar-fixed-top">
       <div class = "container-fluid">
         <div class = "navbar-header">
           <button type = "button" class="navbar-toggle collapsed" data-toggle="collapse" data-target ="#gnavi">
@@ -23,6 +22,7 @@
       </div>
     </nav>
 
+    <body>
     <h2 class="title2">プロページ</h2>
     <br><br>
 
@@ -41,11 +41,13 @@
         <td><%= current_professional.self_introduction %></td>
       </tr>
     </table>
-    <br><br>
+    </body>
 
-    <footer>
-      <div class="company">© Couple Happiness Corp. All RIGHTS RESERVED.</div>
-    </footer>
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+      <footer>
+        <div class="company">© Couple Happiness Corp. All RIGHTS RESERVED.</div>
+      </footer>
+    </nav>
   </div>
-  <div class="col-xs-1"></div>
+
 </div>

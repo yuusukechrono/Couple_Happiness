@@ -1,7 +1,6 @@
 <div class="container">
-  <div class="col-xs-1"></div>
-  <div class="col-xs-10">
-    <nav class = "navbar navbar-default">
+  <div class="col-xs">
+    <nav class = "navbar navbar-default navbar-fixed-top">
       <div class = "container-fluid">
         <div class = "navbar-header">
           <button type = "button" class="navbar-toggle collapsed" data-toggle="collapse" data-target ="#gnavi">
@@ -26,6 +25,7 @@
       </div>
     </nav>
 
+    <body>
     <h2 class="title2">質問一覧</h2>
     <br>
     <p><%= notice %></p>
@@ -52,10 +52,12 @@
           <%= a.label :answer, question.answer_right %>
           <br>
           <%= a.label :詳細（細かく記載したい場合お使いください） %><br>
-          <%= a.text_area :answer_detail %>
+          <%= a.text_area :answer_detail, id: 'input-text', :size=>"100x4" %>
+          <%# <p id="counter">0文字/200文字</p> %>
           <%= a.hidden_field :user_id, value: current_user.id %>   
           <%= a.hidden_field :question_id, value: question.id %>   
           <%= a.submit :申請する %>
+          <br><br>
         <% end %>
       <% else %>
         <%= form_with model: Answer.new, local: true do |a| %>
@@ -65,19 +67,22 @@
           <%= a.label :answer, question.answer_right %>
           <br>
           <%= a.label :詳細（細かく記載したい場合お使いください） %><br>
-          <%= a.text_area :answer_detail %>
+          <%= a.text_area :answer_detail, id: 'input-text',  :size=>"100x4" %>
+          <%# <p id="counter">0文字/200文字</p> %>
           <%= a.hidden_field :user_id, value: current_user.id %>   
           <%= a.hidden_field :question_id, value: question.id %>   
           <%= a.submit :申請する %>
+          <br><br>
         <% end %>
       <% end %>
     <% end %> 
     </div>
-    <br><br>
+    </body>
 
-    <footer>
-      <div class="company">© Couple Happiness. All RIGHTS RESERVED.</div>
-    </footer>
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+      <footer>
+        <div class="company">© Couple Happiness. All RIGHTS RESERVED.</div>
+      </footer>
+    </nav>
   </div>
-  <div class="col-xs-1"></div>
 </div>

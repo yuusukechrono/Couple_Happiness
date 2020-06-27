@@ -1,7 +1,6 @@
 <div class="container">
-  <div class="col-xs-1"></div>
-  <div class="col-xs-10">
-    <nav class = "navbar navbar-default">
+  <div class="col-xs">
+    <nav class = "navbar navbar-default navbar-fixed-top">
       <div class = "container-fluid">
         <div class = "navbar-header">
           <button type = "button" class="navbar-toggle collapsed" data-toggle="collapse" data-target ="#gnavi">
@@ -26,6 +25,7 @@
       </div>
     </nav>
 
+    <body>
     <% @professional = Professional.all %>
     <h2 class="title2">プロフェッショナル一覧</h2>
     <br>
@@ -48,11 +48,12 @@
         </tr>
       <% end %>
     </table>
-    <br>
+    </body>
 
-    <footer>
-      <div class="company">© Couple Happiness Corp. All RIGHTS RESERVED.</div>
-    </footer>
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+      <footer>
+        <div class="company">© Couple Happiness Corp. All RIGHTS RESERVED.</div>
+      </footer>
+    </nav>
   </div>
-  <div class="col-xs-1"></div>
 </div>

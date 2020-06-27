@@ -1,7 +1,6 @@
 <div class="container">
-  <div class="col-xs-1"></div>
-  <div class="col-xs-10">
-    <nav class = "navbar navbar-default">
+  <div class="col-xs">
+    <nav class = "navbar navbar-default navbar-fixed-top">
       <div class = "container-fluid">
         <div class = "navbar-header">
           <button type = "button" class="navbar-toggle collapsed" data-toggle="collapse" data-target ="#gnavi">
@@ -26,6 +25,7 @@
       </div>
     </nav>
 
+    <body>
     <h2 class="title2">ユーザー情報編集</h2>
     <br>
 
@@ -93,13 +93,13 @@
       <%= f.submit "アカウントの変更" %>
       <br><br>
     <% end %>
-    <%= link_to 'トップ画面に移動する', users_path(@user.id) %>
     </div>
-    <br><br>
+    </body>
 
-    <footer>
-      <div class="company">© Couple Happiness Corp. All RIGHTS RESERVED.</div>
-    </footer>
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+      <footer>
+        <div class="company">© Couple Happiness Corp. All RIGHTS RESERVED.</div>
+      </footer>
+    </nav>
   </div>
-  <div class="col-xs-1"></div>
 </div>

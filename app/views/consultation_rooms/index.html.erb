@@ -1,7 +1,6 @@
 <div class="container">
-  <div class="col-xs-1"></div>
-  <div class="col-xs-10">
-    <nav class = "navbar navbar-default">
+  <div class="col-xs">
+    <nav class = "navbar navbar-default navbar-fixed-top">
       <div class = "container-fluid">
         <div class = "navbar-header">
           <button type = "button" class="navbar-toggle collapsed" data-toggle="collapse" data-target ="#gnavi">
@@ -23,37 +22,40 @@
       </div>
     </nav>
 
-  <h2 class="title2">メッセージ一覧</h2>
-  <br><br>
+    <body>
+    <h2 class="title2">メッセージ一覧</h2>
+    <br><br>
 
-  <table>
-    <% if @consultation_rooms.present? %>
-      <th>相談相手</th>
-      <th>メッセージへ</th>
-      <% @consultation_rooms.each do |consultation_room| %>
-        <% if logged_in? %>
-          <% if consultation_room.sender_id == current_user.id %>
-            <tr><td>
-              <%= consultation_room.professional.last_name %><%= consultation_room.professional.first_name %></td>
-              <td>
-              <%= link_to 'メッセージをやり取りする', consultation_room_messages_path(consultation_room.id)%>
-            </td></tr>
-          <% end %>
-        <% elsif logged_in_professional? %>
-          <% if consultation_room.recipient_id == current_professional.id %>
-            <tr><td>
-              <%= consultation_room.user.last_name %><%= consultation_room.user.first_name %></td>
-              <td><%= link_to 'メッセージをやり取りする', consultation_room_messages_path(consultation_room.id)%>
-            </td></tr>
+    <table>
+      <% if @consultation_rooms.present? %>
+        <th>相談相手</th>
+        <th>メッセージへ</th>
+        <% @consultation_rooms.each do |consultation_room| %>
+          <% if logged_in? %>
+            <% if consultation_room.sender_id == current_user.id %>
+              <tr><td>
+                <%= consultation_room.professional.last_name %><%= consultation_room.professional.first_name %></td>
+                <td>
+                <%= link_to 'メッセージをやり取りする', consultation_room_messages_path(consultation_room.id)%>
+              </td></tr>
+            <% end %>
+          <% elsif logged_in_professional? %>
+            <% if consultation_room.recipient_id == current_professional.id %>
+              <tr><td>
+                <%= consultation_room.user.last_name %><%= consultation_room.user.first_name %></td>
+                <td><%= link_to 'メッセージをやり取りする', consultation_room_messages_path(consultation_room.id)%>
+              </td></tr>
+            <% end %>
           <% end %>
         <% end %>
       <% end %>
-    <% end %>
-  </table>
-  <br><br>
-  <footer>
-    <div class="company">© Couple Happiness Corp. All RIGHTS RESERVED.</div>
-  </footer>
+    </table>
+    </body>
+
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+      <footer>
+        <div class="company">© Couple Happiness Corp. All RIGHTS RESERVED.</div>
+      </footer>
+    </nav>
   </div>
-  <div class="col-xs-1"></div>
 </div>

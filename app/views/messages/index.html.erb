@@ -1,7 +1,6 @@
 <div class="container">
-  <div class="col-xs-1"></div>
-  <div class="col-xs-10">
-    <nav class = "navbar navbar-default">
+  <div class="col-xs">
+    <nav class = "navbar navbar-default navbar-fixed-top">
       <div class = "container-fluid">
         <div class = "navbar-header">
           <button type = "button" class="navbar-toggle collapsed" data-toggle="collapse" data-target ="#gnavi">
@@ -34,6 +33,7 @@
       </div>
     </nav>
 
+    <body>
     <h2 class="title2"><%= @consultation_room.user.last_name %><%= @consultation_room.user.first_name %>　と　<%= @consultation_room.professional.last_name %><%= @consultation_room.professional.first_name %>の相談部屋</h2>
     <br><br>
     <div class="base_a">
@@ -76,7 +76,7 @@
     <br>
     <%= form_with(model: [@consultation_room, @message]) do |f| %>
       <div class="field">
-        <%= f.text_area :body%>
+        <%= f.text_area :body, :size=>"80x3" %>
       </div>
       <% if logged_in? %>
         <%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>
@@ -87,11 +87,13 @@
         <%= f.submit "メッセージを送る" %>
       </div>
     <% end %>
-    <br><br>
     </div>
-    <footer>
-      <div class="company">© Couple Happiness Corp. All RIGHTS RESERVED.</div>
-    </footer>
+    </body>
+
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+      <footer>
+        <div class="company">© Couple Happiness Corp. All RIGHTS RESERVED.</div>
+      </footer>
+    </nav>
   </div>
-  <div class="col-xs-1"></div>
 </div>

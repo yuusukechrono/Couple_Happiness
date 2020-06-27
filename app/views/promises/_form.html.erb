@@ -1,7 +1,6 @@
 <div class="container">
-  <div class="col-xs-1"></div>
-  <div class="col-xs-10">
-    <nav class = "navbar navbar-default">
+  <div class="col-xs">
+    <nav class = "navbar navbar-default navbar-fixed-top">
       <div class = "container-fluid">
         <div class = "navbar-header">
           <button type = "button" class="navbar-toggle collapsed" data-toggle="collapse" data-target ="#gnavi">
@@ -26,6 +25,7 @@
       </div>
     </nav>
 
+    <body>
     <h2 class="title2">家訓登録</h2>
     <p><%= notice %></p>
     <br>
@@ -49,16 +49,18 @@
       <%= promise.select :category_id, [["結婚", 1], ["趣味", 2], ["食事", 3], ["イベント", 4],  ["仕事", 5],  ["住居", 6],  ["家事", 7],  ["服", 8],  ["お金", 9],  ["子育て", 10],  ["家族", 11],  ["介護", 12],  ["友人", 13],  ["美容", 14],  ["健康", 15],  ["性生活", 16]], include_blank: "選択して下さい" %><br>
 
       <%= promise.label :詳細 %><br>
-      <%= promise.text_area :detail %><br>
+      <%= promise.text_area :detail,:size=>"80x1" %><br>
       <br><br>
       <%= promise.submit '登録する' %><br><br>
     <% end %>
     </div>
+    </body>
 
-    <footer>
-      <div class="company">© Couple Happiness Corp. All RIGHTS RESERVED.</div>
-    </footer>
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+      <footer>
+        <div class="company">© Couple Happiness Corp. All RIGHTS RESERVED.</div>
+      </footer>
+    </nav>
   </div>
-  <div class="col-xs-1"></div>
 </div>
 
